@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     private int height;
     private MyCoolAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

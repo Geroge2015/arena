@@ -46,8 +46,5 @@ public class MyViewPagerActivity extends Activity {
         viewList.add(LayoutInflater.from(this).inflate(R.layout.view_pager3, null));
         viewPagerAdapter = new MyViewPagerAdapter(viewList);
         viewPager.setAdapter(viewPagerAdapter);
-
     }
-
-
 }
