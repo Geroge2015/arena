@@ -31,53 +31,6 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         addRecyclerView();
     }
 
-    // test on ViewPager demo
-    private void addMyViewPager() {
-        View view1 = LayoutInflater.from(this).inflate(R.layout.view_pager1, null);
-        View view2 = LayoutInflater.from(this).inflate(R.layout.view_pager2, null);
-        View view3 = LayoutInflater.from(this).inflate(R.layout.view_pager3, null);
-        View view4 = LayoutInflater.from(this).inflate(R.layout.view_pager1, null);
-        View view5 = LayoutInflater.from(this).inflate(R.layout.view_pager2, null);
-        View view6 = LayoutInflater.from(this).inflate(R.layout.view_pager3, null);
-
-        viewList = new ArrayList<>();
-        viewList.add(view1);
-        viewList.add(view2);
-        viewList.add(view3);
-        viewList.add(view4);
-        viewList.add(view5);
-        viewList.add(view6);
-
-        ViewPager viewPager = ((ViewPager) findViewById(R.id.my_viewpager));
-        PagerAdapter adapter = new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return viewList.size();
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                container.addView(viewList.get(position));
-                return viewList.get(position);
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(viewList.get(position));
-            }
-        };
-        viewPager.setAdapter(adapter);
-
-
-
-    }
-
-
     private void addRecyclerView() {
         dataList = new ArrayList<>();
 
