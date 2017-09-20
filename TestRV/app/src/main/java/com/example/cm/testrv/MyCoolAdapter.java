@@ -53,6 +53,8 @@ public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 ((MyViewHolder) holder).textView.setText(datalist.get(position - 1));
             }
         }
+
+        //  click listener here...
         if (null != itemClickListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
