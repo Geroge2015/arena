@@ -1,16 +1,18 @@
 package com.example.cm.testrv;
 
+import android.content.ComponentName;
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.cm.testrv.service.MyLockerService;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,20 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     private int width;
     private int height;
     private MyCoolAdapter adapter;
+    private MyLockerService.MyBinder mBinder;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mBinder = ((MyLockerService.MyBinder) service);
+            mBinder.startTask();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +53,10 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("RecyclerView Demo");
         dataList.add("ViewPager Demo");
         dataList.add("Fragment Demo");
-        dataList.add("A");
-        dataList.add("B");
+        dataList.add("Start Service");
+        dataList.add("Stop Service");
+        dataList.add("Bind Service");
+        dataList.add("UnBind Service");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -63,10 +81,43 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 1:
                 jumpToViewPager();
                 break;
+            case 3:
+                startLockerService();
+                break;
+            case 4:
+                stopService();
+                break;
+            case 5:
+                bindService();
+                break;
+            case 6:
+                unbindService();
+                break;
+
             default:
                 break;
 
         }
+    }
+
+    private void bindService() {
+        Intent intent = new Intent(this, MyLockerService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+    }
+
+    private void unbindService() {
+        unbindService(connection);
+    }
+
+    private void stopService() {
+        Intent stopIntent = new Intent(this, MyLockerService.class);
+        stopService(stopIntent);
+    }
+
+    private void startLockerService() {
+            Intent start = new Intent(this, MyLockerService.class);
+            startService(start);
+
     }
 
     private void jumpToRV() {
@@ -87,4 +138,6 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         adapter.setOnItemClickListener(null);
         super.onDestroy();
     }
+
+
 }
