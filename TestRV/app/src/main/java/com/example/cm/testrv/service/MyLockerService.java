@@ -16,8 +16,7 @@ import android.util.Log;
 public class MyLockerService extends Service {
 
     public static final String TAG = "MyLockerService";
-    private MyBinder mBinder;
-
+    private MyBinder mBinder = new MyBinder();
 
     @Override
     public void onCreate() {
@@ -39,8 +38,15 @@ public class MyLockerService extends Service {
     }
 
     @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(TAG, "onUnBind called !");
+        return super.onUnbind(intent);
+    }
+
+    @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy executed !");
+        // 清理资源
         super.onDestroy();
     }
 

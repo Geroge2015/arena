@@ -64,9 +64,6 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         mListView.setAdapter(adapter);
 //        mListView.setItemAnimator(new DefaultItemAnimator());
 //        mListView.addItemDecoration();
-
-
-
         getPhonePrams(this);
 
     }
@@ -100,13 +97,9 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         }
     }
 
-    private void bindService() {
-        Intent intent = new Intent(this, MyLockerService.class);
-        bindService(intent, connection, BIND_AUTO_CREATE);
-    }
-
-    private void unbindService() {
-        unbindService(connection);
+    private void startLockerService() {
+        Intent start = new Intent(this, MyLockerService.class);
+        startService(start);
     }
 
     private void stopService() {
@@ -114,10 +107,13 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         stopService(stopIntent);
     }
 
-    private void startLockerService() {
-            Intent start = new Intent(this, MyLockerService.class);
-            startService(start);
+    private void bindService() {
+        Intent intent = new Intent(this, MyLockerService.class);
+        bindService(intent, connection, BIND_AUTO_CREATE);
+    }
 
+    private void unbindService() {
+        unbindService(connection);
     }
 
     private void jumpToRV() {
@@ -138,6 +134,4 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         adapter.setOnItemClickListener(null);
         super.onDestroy();
     }
-
-
 }
