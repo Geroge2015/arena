@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,7 +65,12 @@ public class MyRecyclerViewActivity extends Activity implements MyCoolAdapter.My
 
     @Override
     public void onItemClickListener(View view, int position) {
+        Toast.makeText(getApplicationContext(), "position : " + position, Toast.LENGTH_SHORT).show();
 
+        switch (position) {
+
+
+        }
     }
 
 

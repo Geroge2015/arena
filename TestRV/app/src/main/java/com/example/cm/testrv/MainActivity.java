@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("Stop Service");
         dataList.add("Bind Service");
         dataList.add("UnBind Service");
+        dataList.add("Custom View");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 1:
                 jumpToViewPager();
                 break;
+            case 2:
+                // TODO: 2017/9/22
+                break;
             case 3:
                 startLockerService();
                 break;
@@ -90,11 +94,18 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 6:
                 unbindService();
                 break;
+            case 7:
+                goToCustomView(); 
+                break;
 
             default:
                 break;
 
         }
+    }
+
+    private void goToCustomView() {
+        // TODO: 2017/9/22  
     }
 
     private void startLockerService() {
