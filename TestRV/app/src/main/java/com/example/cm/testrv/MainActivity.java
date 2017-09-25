@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("Bind Service");
         dataList.add("UnBind Service");
         dataList.add("Custom View");
+        dataList.add("My Settings");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         Toast.makeText(getApplicationContext(), "position : " + position, Toast.LENGTH_SHORT).show();
         switch (position) {
             case 0:
+                int time = ((int) (System.currentTimeMillis() /1000));
+                Log.d("George889", "time  now :" + time);
                 jumpToRV();
                 break;
             case 1:
@@ -97,11 +101,17 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 7:
                 goToCustomView(); 
                 break;
+            case 8:
+                gotoSettings();
 
             default:
                 break;
 
         }
+    }
+
+    private void gotoSettings() {
+        MySettingActivity.startSettingActivity(this);
     }
 
     private void goToCustomView() {
