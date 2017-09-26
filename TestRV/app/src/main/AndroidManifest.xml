@@ -25,7 +25,8 @@
             </intent-filter>
         </receiver>
         <service android:name=".service.MyLockerService"/>
-        <activity android:name=".MySettingActivity" />
+        <activity android:name=".MySettingActivity"
+            android:theme="@style/AppTheme1"/>
     </application>
 
 </manifest>
