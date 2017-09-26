@@ -13,5 +13,9 @@
         android:key="my_edittext_preference"
         android:title="edittext_preference"
         android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="my_switch_preference"
+        android:title="switch preference"
+        android:defaultValue="true"/>
 
 </PreferenceScreen>
