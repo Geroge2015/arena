@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#f0f"
     android:layout_width="match_parent"
@@ -9,5 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_gravity="center_horizontal"
         android:text="Hello World"/>
-</RelativeLayout>
+
+    <com.example.cm.testrv.widget.MyTextView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:background="#ff0"
+        app:text="MyTextView"
+        app:testAttr="520"/>
+
+</LinearLayout>
