@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 /**
  * Created by cm on 2017/9/25.
+ *
  */
 
 public class MySettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {

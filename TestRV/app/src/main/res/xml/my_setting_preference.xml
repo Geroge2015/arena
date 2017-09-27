@@ -22,6 +22,11 @@
         android:title="switch preference"
         android:widgetLayout="@layout/my_switch_button_widget_layout"
         android:defaultValue="true"/>
+    <com.example.cm.testrv.widget.MySwitchPreference
+        android:key="my_switch_preference"
+        android:title="switch preference"
+        android:widgetLayout="@layout/my_switch_button_widget_layout"
+        android:defaultValue="true"/>
 
 
 </PreferenceScreen>
