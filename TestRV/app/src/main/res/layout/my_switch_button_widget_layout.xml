@@ -6,5 +6,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:thumbTint="#FF0"
+    android:trackTint="#f0f"
+    android:buttonTint="#0f0"
     android:focusable="false">
 </Switch>
