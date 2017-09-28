@@ -19,9 +19,18 @@ android {
     }
 }
 
+String SDK_DIR = System.getenv("ANDROID_HOME")
+if(SDK_DIR == null) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(project.rootProject.file("local.properties")))
+    SDK_DIR = props.get('sdk.dir');
+}
+String PLATFORMS_VER  = "android-23"
+
 dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided files("libs/layoutlib.jar")
+    provided files("${SDK_DIR}/platforms/${PLATFORMS_VER}/data/layoutlib.jar")
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

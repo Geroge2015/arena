@@ -30,7 +30,8 @@ import com.example.cm.testrv.R;
 public class MySwitchPreference extends TwoStatePreference {
 
     public static final float ALPHA_RATE = 0.4f;
-
+    private View mView;
+    private boolean bActive;
     private final Listener mListener = new Listener();
 
     private class Listener implements CompoundButton.OnCheckedChangeListener {
@@ -57,7 +58,9 @@ public class MySwitchPreference extends TwoStatePreference {
 
     public MySwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray a = context.obtainStyledAttributes(attrs, com.android.internal.R.styleable.SwitchPreference);
+        bActive = true;
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                com.android.internal.R.styleable.SwitchPreference);
         setDisableDependentsState(a.getBoolean(
                 com.android.internal.R.styleable.SwitchPreference_disableDependentsState, false));
         a.recycle();
@@ -66,6 +69,7 @@ public class MySwitchPreference extends TwoStatePreference {
     @Override
     protected void onBindView(View view) {
         super.onBindView(view);
+        mView = view;
         View checkableView = view.findViewById(R.id.my_switch_button);
         if (checkableView != null && checkableView instanceof Checkable) {
             if (checkableView instanceof Switch) {
@@ -76,15 +80,16 @@ public class MySwitchPreference extends TwoStatePreference {
             }
         }
         updatePreferenceIcon();
-
+        updatePreferenceLayout(view);
+        refreshIcon();
     }
-
 
     @Override
     public void setChecked(boolean checked) {
-        super.setChecked(checked);
+        if (bActive) {
+            super.setChecked(checked);
+        }
     }
-
 
     @Override
     public void setEnabled(boolean enabled) {
@@ -93,8 +98,25 @@ public class MySwitchPreference extends TwoStatePreference {
 
     @Override
     public boolean isEnabled() {
-        return super.isEnabled();
+        if (bActive) {
+            return super.isEnabled();
+        } else {
+            return true;
+        }
     }
+
+    public void setActive(boolean b) {
+        bActive = b;
+    }
+
+    public boolean isActive() {
+        return bActive;
+    }
+
+    public View getView() {
+        return mView;
+    }
+
 
     private void updatePreferenceIcon() {
         Drawable d = this.getIcon();
@@ -104,6 +126,20 @@ public class MySwitchPreference extends TwoStatePreference {
             } else {
                 d.setAlpha((int) (255 * ALPHA_RATE));
             }
+        }
+    }
+
+    private void updatePreferenceLayout(View view) {
+        if (bActive) {
+            view.setAlpha(1);
+        } else {
+            view.setAlpha(ALPHA_RATE);
+        }
+    }
+
+    private void refreshIcon() {
+        if (mView != null) {
+            mView.setActivated(bActive);
         }
     }
 }
