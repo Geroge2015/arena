@@ -37,13 +37,4 @@
         <attr name="testTextSize" />
     </declare-styleable>
 
-    <attr name="myText" format="string" />
-    <attr name="myTextColor" format="color" />
-    <attr name="myTextSize" format="dimension" />
-
-    <declare-styleable name="TestView">
-        <attr name="myText"/>
-        <attr name="myTextColor" />
-        <attr name="myTextSize"/>
-    </declare-styleable>
 </resources>

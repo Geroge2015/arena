@@ -16,9 +16,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-/**
+/*
  * Created by George on 2017/8/26.
- *
  */
 
 public class CustomTitleView extends View {
@@ -46,40 +45,51 @@ public class CustomTitleView extends View {
          * 获得我们所定义的自定义样式属性
          */
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomTitleView, defStyleAttr, 0);
-        int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
-            int attr = a.getIndex(i);
-            switch (attr) {
-                case R.styleable.CustomTitleView_testText:
-                    mTestText = a.getString(attr);
-                    break;
-                case R.styleable.CustomTitleView_testTextColor:
-                    // 默认颜色设置为黑色
-                    mTestColor = a.getColor(attr, Color.BLACK);
-                    break;
-                case R.styleable.CustomTitleView_testTextSize:
-                    // 默认设置为16sp，TypeValue也可以把sp转化为px
-                    mTestTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
-                    break;
-
-            }
+//        int n = a.getIndexCount();
+//        for (int i = 0; i < n; i++) {
+//            int attr = a.getIndex(i);
+//            switch (attr) {
+//                case R.styleable.CustomTitleView_testText:
+//                    mTestText = a.getString(attr);
+//                    break;
+//                case R.styleable.CustomTitleView_testTextColor:
+//                    // 默认颜色设置为黑色
+//                    mTestColor = a.getColor(attr, Color.BLACK);
+//                    break;
+//                case R.styleable.CustomTitleView_testTextSize:
+//                    // 默认设置为16sp，TypeValue也可以把sp转化为px
+//                    mTestTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(
+//                            TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+//                    break;
+//
+//            }
+//        }
+        if (null != a) {
+            mTestText = a.getString(R.styleable.CustomTitleView_testText);
+            mTestColor = a.getColor(R.styleable.CustomTitleView_testTextColor, Color.BLACK);
+            mTestTextSize = a.getDimensionPixelSize(R.styleable.CustomTitleView_testTextSize,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
+            a.recycle();
+            /*
+             * 获得绘制文本的宽和高
+             */
+            mPaint = new Paint();
+            mPaint.setTextSize(mTestTextSize);
+            mPaint.setColor(mTestColor);
+            mBound = new Rect();
+            mPaint.getTextBounds(mTestText, 0, mTestText.length(), mBound);
         }
-        a.recycle();
-        /**
-         * 获得绘制文本的宽和高
-         */
-        mPaint = new Paint();
-        mPaint.setTextSize(mTestTextSize);
-        mPaint.setColor(mTestColor);
-        mBound = new Rect();
-        mPaint.getTextBounds(mTestText, 0, mTestText.length(), mBound);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTestText = randomText();
-                postInvalidate();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        postInvalidate();
+                    }
+                }).start();
             }
         });
     }
@@ -112,7 +122,7 @@ public class CustomTitleView extends View {
                 width = getPaddingLeft() + getPaddingRight() + widthSize;
                 break;
             case MeasureSpec.AT_MOST:
-                width = getPaddingLeft() + mBound.width() + getPaddingBottom();
+                width = getPaddingLeft() + mBound.width() + getPaddingRight();
                 break;
             default:
                 width = getPaddingLeft() + getPaddingRight() + widthSize;
@@ -140,7 +150,7 @@ public class CustomTitleView extends View {
         super.onDraw(canvas);
         mPaint.setColor(Color.YELLOW);
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), mPaint);
-        mPaint.setColor(Color.BLUE);
+        mPaint.setColor(mTestColor);
         canvas.drawText(mTestText, getWidth() / 2 - mBound.width() / 2, getHeight() / 2 + mBound.height() / 2, mPaint);
     }
 }

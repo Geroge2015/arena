@@ -25,7 +25,6 @@ public class MyAnimView extends View {
         mPaint.setColor(Color.BLUE);
     }
 
-    // FIXME: 2017/8/23  How is this method called ?
     @Override
     protected void onDraw(Canvas canvas) {
         if (currentPoint == null) {
@@ -57,8 +56,5 @@ public class MyAnimView extends View {
         anim.setDuration(5000);
         anim.start();
     }
-
-
-
 
 }

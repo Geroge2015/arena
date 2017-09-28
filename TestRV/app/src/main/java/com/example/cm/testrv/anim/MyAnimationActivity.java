@@ -3,8 +3,11 @@ package com.example.cm.testrv.anim;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.cm.testrv.R;
@@ -12,12 +15,26 @@ import com.example.cm.testrv.R;
 public class MyAnimationActivity extends AppCompatActivity {
     private TextView mTv;
 
+    public static void startAnimation(Context context) {
+        Intent intent = new Intent(context, MyAnimationActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_animation_layout);
+        initView();
 //        init1();
 //        initPoint();
+    }
+
+    private void initView() {
+        View view = findViewById(R.id.my_custom_title_view);
+        if (null != view) {
+            view.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void initPoint() {

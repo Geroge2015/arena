@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cm.testrv.anim.MyAnimationActivity;
 import com.example.cm.testrv.service.MyLockerService;
 
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 jumpToViewPager();
                 break;
             case 2:
-                // TODO: 2017/9/22
+                goToCustomView();
                 break;
             case 3:
                 startLockerService();
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     }
 
     private void goToCustomView() {
-        // TODO: 2017/9/22  
+        MyAnimationActivity.startAnimation(this);
     }
 
     private void startLockerService() {

@@ -22,28 +22,24 @@
         android:layout_centerHorizontal="true"
         android:text="Hello World!" />
 
-    <com.applocktheme.george.mytestanimation.CustomView
+    <com.example.cm.testrv.anim.CustomView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-    <com.applocktheme.george.mytestanimation.CustomTitleView
+    <com.example.cm.testrv.anim.CustomTitleView
+        android:id="@+id/my_custom_title_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="60dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="80dp"
         android:layout_centerInParent="true"
-        android:padding="15dp"
-        custom:testText="3721"
+        custom:testText="6666"
         custom:testTextColor="#ff0000"
         custom:testTextSize="45sp"
         android:visibility="gone"/>
 
-    <com.applocktheme.george.mytestanimation.TestView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        custom:myText="Test !!!!"
-        custom:myTextColor="#0f0"
-        custom:myTextSize="20sp"
-        />
 
 </RelativeLayout>
