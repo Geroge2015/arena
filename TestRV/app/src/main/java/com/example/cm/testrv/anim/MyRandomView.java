@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by George on 2017/8/26.
  */
 
-public class CustomTitleView extends View {
+public class MyRandomView extends View {
 
 
     private String mTestText;
@@ -31,20 +31,20 @@ public class CustomTitleView extends View {
     private Paint mPaint;
 
 
-    public CustomTitleView(Context context) {
+    public MyRandomView(Context context) {
         this(context, null);
     }
 
-    public CustomTitleView(Context context, AttributeSet attrs) {
+    public MyRandomView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CustomTitleView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyRandomView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         /**
          * 获得我们所定义的自定义样式属性
          */
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomTitleView, defStyleAttr, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyRandomView, defStyleAttr, 0);
 //        int n = a.getIndexCount();
 //        for (int i = 0; i < n; i++) {
 //            int attr = a.getIndex(i);
@@ -65,9 +65,9 @@ public class CustomTitleView extends View {
 //            }
 //        }
         if (null != a) {
-            mTestText = a.getString(R.styleable.CustomTitleView_testText);
-            mTestColor = a.getColor(R.styleable.CustomTitleView_testTextColor, Color.BLACK);
-            mTestTextSize = a.getDimensionPixelSize(R.styleable.CustomTitleView_testTextSize,
+            mTestText = a.getString(R.styleable.MyRandomView_testText);
+            mTestColor = a.getColor(R.styleable.MyRandomView_testTextColor, Color.BLACK);
+            mTestTextSize = a.getDimensionPixelSize(R.styleable.MyRandomView_testTextSize,
                     (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
             a.recycle();
             /*

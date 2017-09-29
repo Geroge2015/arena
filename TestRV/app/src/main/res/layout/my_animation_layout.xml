@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-    <com.example.cm.testrv.anim.CustomTitleView
+    <com.example.cm.testrv.anim.MyRandomView
         android:id="@+id/my_custom_title_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +40,14 @@
         custom:testTextColor="#ff0000"
         custom:testTextSize="45sp"
         android:visibility="gone"/>
+
+    <com.example.cm.testrv.anim.MyCircleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:cv_background="@color/colorPrimary"
+        custom:cv_circle_fill="true"
+        custom:cv_img="@drawable/ic_panda"
+        custom:cv_radius="100dp"/>
 
 
 </RelativeLayout>

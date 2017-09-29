@@ -31,10 +31,23 @@
     <attr name="testTextColor" format="color" />
     <attr name="testTextSize" format="dimension" />
 
-    <declare-styleable name="CustomTitleView">
+    <declare-styleable name="MyRandomView">
         <attr name="testText"/>
         <attr name="testTextColor" />
         <attr name="testTextSize" />
+    </declare-styleable>
+
+    <declare-styleable name="MyCircleView">
+        <attr name="cv_background" format="color|reference"/>
+        <attr name="cv_radius" format="dimension|reference"/>
+        <attr name="cv_drawText" format="boolean|reference"/>
+        <attr name="cv_low_level" format="color|reference"/>
+        <attr name="cv_mid_level" format="color|reference"/>
+        <attr name="cv_high_level" format="color|reference"/>
+        <attr name="cv_crinkleColor" format="color|reference"/>
+        <attr name="cv_circle_width" format="dimension|reference"/>
+        <attr name="cv_circle_fill" format="boolean|reference"/>
+        <attr name="cv_img" format="reference"/>
     </declare-styleable>
 
 </resources>
