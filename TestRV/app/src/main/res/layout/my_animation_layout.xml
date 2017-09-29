@@ -49,5 +49,9 @@
         custom:cv_img="@drawable/ic_panda"
         custom:cv_radius="100dp"/>
 
+    <com.example.cm.testrv.anim.TestView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </RelativeLayout>
