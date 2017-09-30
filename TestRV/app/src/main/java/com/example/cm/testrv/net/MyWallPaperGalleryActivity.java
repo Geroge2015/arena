@@ -103,7 +103,8 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
             mRecyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
-                    return false;
+                    mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return true;
                 }
             });
             mAdapter.addAllItems(items);

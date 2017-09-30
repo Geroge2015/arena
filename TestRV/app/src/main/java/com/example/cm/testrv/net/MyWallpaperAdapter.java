@@ -44,7 +44,6 @@ public class MyWallpaperAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
             LayoutInflater inflater = ((LayoutInflater) parent.getContext().
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE));
             View view = inflater.inflate(R.layout.my_wallpaper_item_recycler_view_item, parent, false);
@@ -75,11 +74,11 @@ public class MyWallpaperAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (getItemCount() - 1 == position) {
-            return TYPE_FOOTER;
-        } else {
+//        if (getItemCount() - 1 == position) {
+//            return TYPE_FOOTER;
+//        } else {
             return TYPE_ITEM;
-        }
+//        }
     }
 
     public void addAllItems(List<WallpaperItem> items) {

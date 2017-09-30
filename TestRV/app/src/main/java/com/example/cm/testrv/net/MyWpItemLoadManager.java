@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.cm.testrv.MyApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +17,16 @@ import java.util.List;
  */
 
 public class MyWpItemLoadManager {
+    private static final int PAGE_SIZE = 30;
+
 
     private Context mContext;
     private static MyWpItemLoadManager sInstance;
     private static byte[] mLock = new byte[0];
     private int mCurrentPage;
     private RequestQueue mRequestQueue;
+    private List<WallpaperItem> mCaches;
+
 
 
     public MyWpItemLoadManager() {
@@ -47,12 +52,15 @@ public class MyWpItemLoadManager {
                 return;
             }
 
-        String url = URLUtils.getWallpaperList(0);
+        String url = URLUtils.getWallpaperList(1);
 
         WallpaperItemRequest request = new WallpaperItemRequest(url,
                 new Response.Listener<WallpaperItemRequest.WallpaperItemResult>() {
             @Override
             public void onResponse(WallpaperItemRequest.WallpaperItemResult response) {
+
+                saveCache(response.wallpaperItems);
+                getFromCaches(callback);
 
             }
         }, new Response.ErrorListener() {
@@ -66,6 +74,27 @@ public class MyWpItemLoadManager {
 
     }
 
+    private void saveCache(List<WallpaperItem> themes) {
+        if (null != mCaches && null != themes) {
+            mCaches.addAll(themes);
+        }
+    }
+
+    private void getFromCaches(final WallpaperItemCallback callback) {
+        int start = mCurrentPage * PAGE_SIZE;
+
+        if (mCaches.size() <= start) {
+            getFromNetwork(callback);
+        } else {
+            List<WallpaperItem> cache = null;
+            if (null != mCaches || !mCaches.isEmpty()) {
+                cache = new ArrayList<>(mCaches);
+            }
+            callback.onResult(cache);
+            int tmp = mCaches.size() / PAGE_SIZE;
+            mCurrentPage = mCaches.size() % PAGE_SIZE == 0 ? tmp : tmp + 1;
+        }
+    }
 
     public interface WallpaperItemCallback {
         void onResult(List<WallpaperItem> items);
