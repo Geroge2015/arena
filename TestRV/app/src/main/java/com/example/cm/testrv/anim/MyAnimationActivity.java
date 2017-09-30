@@ -31,8 +31,12 @@ public class MyAnimationActivity extends AppCompatActivity {
 
     private void initView() {
         View view = findViewById(R.id.my_custom_title_view);
+        MyCircleView circleView = ((MyCircleView) findViewById(R.id.my_custom_circle_view));
         if (null != view) {
             view.setVisibility(View.VISIBLE);
+        }
+        if (circleView != null) {
+            circleView.setVisibility(View.GONE);
         }
 
     }

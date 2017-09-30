@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.cm.testrv.anim.MyAnimationActivity;
+import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
 import com.example.cm.testrv.service.MyLockerService;
 
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("UnBind Service");
         dataList.add("Custom View");
         dataList.add("My Settings");
+        dataList.add("request internet");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -104,6 +106,10 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 break;
             case 8:
                 gotoSettings();
+                break;
+            case 9:
+                goInternet();
+                break;
 
             default:
                 break;
@@ -149,6 +155,12 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     public void getPhonePrams(Context context) {
         width = context.getResources().getDisplayMetrics().widthPixels;
         height = context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+
+    private void goInternet() {
+        MyWallPaperGalleryActivity.startWallpaperActivity(this);
+
     }
 
     @Override

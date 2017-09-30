@@ -28,6 +28,7 @@
         <activity android:name=".MySettingActivity"
             android:theme="@style/AppTheme1"/>
         <activity android:name=".anim.MyAnimationActivity"/>
+        <activity android:name=".net.MyWallPaperGalleryActivity"/>
     </application>
 
 </manifest>

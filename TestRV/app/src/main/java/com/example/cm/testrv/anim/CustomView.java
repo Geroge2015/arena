@@ -56,6 +56,21 @@ public class CustomView extends View {
         });
         va.setDuration(5000);
         va.start();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
+
     }
 
     private void drawCircle(Canvas canvas) {
