@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 
 import com.example.cm.testrv.R;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MyWallPaperGalleryActivity extends AppCompatActivity {
 
 
+    public static final String TAG = "WPGallery";
     private RecyclerView mRecyclerView;
     private MyWallpaperAdapter mAdapter;
 
@@ -81,6 +83,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
         MyWpItemLoadManager.getInstance().getFromNetwork(new MyWpItemLoadManager.WallpaperItemCallback() {
             @Override
             public void onResult(List<WallpaperItem> items) {
+                Log.d(TAG, "onResult: " + items);
                 updateListView(items);
 
             }
@@ -104,11 +107,19 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreDraw() {
                     mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+//                    checkWallpaperItemsShow();
                     return true;
                 }
             });
             mAdapter.addAllItems(items);
         }
+    }
+
+    private void checkWallpaperItemsShow() {
+        GridLayoutManager gridLayoutManager = ((GridLayoutManager) mRecyclerView.getLayoutManager());
+
+
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.cm.testrv.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -9,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.cm.testrv.MyApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,7 +19,9 @@ import java.util.List;
  */
 
 public class MyWpItemLoadManager {
+
     private static final int PAGE_SIZE = 30;
+    public static final String TAG = "MyWpItemLoadManager";
 
 
     private Context mContext;
@@ -29,8 +33,9 @@ public class MyWpItemLoadManager {
 
 
 
-    public MyWpItemLoadManager() {
+    public MyWpItemLoadManager()     {
         mContext = MyApplication.getAppContext();
+        mCaches = Collections.synchronizedList(new ArrayList<WallpaperItem>());
         mRequestQueue = Volley.newRequestQueue(mContext);
     }
 
@@ -42,8 +47,6 @@ public class MyWpItemLoadManager {
                 }
             }
         }
-
-
         return sInstance;
     }
 
@@ -59,6 +62,7 @@ public class MyWpItemLoadManager {
             @Override
             public void onResponse(WallpaperItemRequest.WallpaperItemResult response) {
 
+                Log.d(TAG, "get from network ... onResponse  response : " + response);
                 saveCache(response.wallpaperItems);
                 getFromCaches(callback);
 
