@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.example.cm.testrv.R;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
     public static final String TAG = "WPGallery";
     private RecyclerView mRecyclerView;
     private MyWallpaperAdapter mAdapter;
-
+    private ImageLoader imageLoader;
     private GridLayoutManager mGridManager;
 
 
@@ -96,6 +97,8 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
             }
         });
 
+        imageLoader = new ImageLoader(MyWpItemLoadManager.getInstance().getRequestQ(), new BitmapCache());
+
     }
 
     private void updateListView(List<WallpaperItem> items) {
@@ -111,6 +114,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
                     return true;
                 }
             });
+            mAdapter.setImageLoader(imageLoader);
             mAdapter.addAllItems(items);
         }
     }
@@ -118,9 +122,8 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
     private void checkWallpaperItemsShow() {
         GridLayoutManager gridLayoutManager = ((GridLayoutManager) mRecyclerView.getLayoutManager());
 
-
-
     }
+
 
 
 }

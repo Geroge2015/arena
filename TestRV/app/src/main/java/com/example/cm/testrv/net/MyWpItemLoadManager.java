@@ -78,6 +78,10 @@ public class MyWpItemLoadManager {
 
     }
 
+    public RequestQueue getRequestQ() {
+        return mRequestQueue;
+    }
+
     private void saveCache(List<WallpaperItem> themes) {
         if (null != mCaches && null != themes) {
             mCaches.addAll(themes);
