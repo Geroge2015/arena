@@ -14,7 +14,11 @@ import android.view.ViewTreeObserver;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.cm.testrv.R;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by George on 2017/9/30.
@@ -52,6 +56,26 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
         mRecyclerView.setVerticalFadingEdgeEnabled(false);
         // TODO: 2017/9/30   无网络布局
         loadData();
+
+        testHashMap();
+    }
+
+    private void testHashMap() {
+        Map<String, String> hashMap = new LinkedHashMap<>(16, 0.75f, true);
+        hashMap.put("apple", "苹果");
+        hashMap.put("orange", "橙子");
+        hashMap.put("banana", "香蕉");
+        hashMap.put("peach", "桃子");
+
+        hashMap.get("orange");
+        hashMap.get("apple");
+
+        Iterator iterator = hashMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = ((Map.Entry) iterator.next());
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+
     }
 
 
