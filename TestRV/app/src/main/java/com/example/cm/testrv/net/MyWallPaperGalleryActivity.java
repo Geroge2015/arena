@@ -2,17 +2,31 @@ package com.example.cm.testrv.net;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cm.testrv.R;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,11 +42,13 @@ import java.util.Map;
 public class MyWallPaperGalleryActivity extends AppCompatActivity {
 
 
-    public static final String TAG = "WPGallery";
+    public static final String TAG = "George2018";
     private RecyclerView mRecyclerView;
     private MyWallpaperAdapter mAdapter;
     private ImageLoader imageLoader;
     private GridLayoutManager mGridManager;
+    private RequestQueue mQueue;
+    public static final String PNG_URL = "https://cmscdn.cmcm.com/applock/themes/t500000126/t-s.png";
 
 
     public static void startWallpaperActivity(Context context) {
@@ -44,7 +60,102 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_wallpaper_list_layout);
-        initView();
+//        initView();
+        testImageLoader();
+    }
+
+    private void testImageLoader() {
+        final ImageView imageView = ((ImageView) findViewById(R.id.image_view));
+        mQueue = Volley.newRequestQueue(getApplicationContext());
+        ImageLoader loader = new ImageLoader(mQueue, new ImageLoader.ImageCache() {
+            @Override
+            public Bitmap getBitmap(String url) {
+                return null;
+            }
+
+            @Override
+            public void putBitmap(String url, Bitmap bitmap) {
+
+            }
+        });
+
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.ic_panda, R.drawable.ic_toys);
+
+        loader.get(PNG_URL, listener, 200, 200);
+
+
+
+    }
+
+    private void testImageRequest() {
+        final ImageView imageView = ((ImageView) findViewById(R.id.image_view));
+        RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
+        ImageRequest imageRequest = new ImageRequest(PNG_URL,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        if (imageView != null) {
+                            imageView.setImageBitmap(response);
+                        }
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        mQueue.add(imageRequest);
+    }
+
+    private void testJsonRequest() {
+        String url = URLUtils.getWallpaperList(1);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, " response ： " + response );
+                Log.d(TAG, "  response ：  \n \n \n " + response.toString());
+                parseJsonObject(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, " error : " + error.getMessage());
+            }
+        });
+
+        mQueue = Volley.newRequestQueue(getApplicationContext());
+        mQueue.add(jsonObjectRequest);
+
+    }
+
+    public void parseJsonObject(JSONObject response) {
+    }
+
+    private void testStringRequest() {
+        mQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://www.baidu.com/",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "response : " + response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Error : " + error);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("param1", "value1");
+                map.put("param2", "value2");
+                return map;
+            }
+        };
+        mQueue.add(stringRequest);
+
     }
 
     private void initView() {
@@ -57,7 +168,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
         // TODO: 2017/9/30   无网络布局
         loadData();
 
-        testHashMap();
+//        testHashMap();
     }
 
     private void testHashMap() {
@@ -91,11 +202,13 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
+            // TODO: 2017/10/9  
         }
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            // TODO: 2017/10/9  
         }
     }
 
