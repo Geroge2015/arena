@@ -12,6 +12,7 @@ import com.example.cm.testrv.MyApplication;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by George on 2017/9/30.
