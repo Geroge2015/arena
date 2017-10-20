@@ -65,7 +65,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
     }
 
     private void testImageLoader() {
-        final ImageView imageView = ((ImageView) findViewById(R.id.image_view));
+        final ImageView imageView = ((ImageView) findViewById(R.id.test_image_view));
         mQueue = Volley.newRequestQueue(getApplicationContext());
         ImageLoader loader = new ImageLoader(mQueue, new ImageLoader.ImageCache() {
             @Override
@@ -88,7 +88,7 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
     }
 
     private void testImageRequest() {
-        final ImageView imageView = ((ImageView) findViewById(R.id.image_view));
+        final ImageView imageView = ((ImageView) findViewById(R.id.test_image_view));
         RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
         ImageRequest imageRequest = new ImageRequest(PNG_URL,
                 new Response.Listener<Bitmap>() {
