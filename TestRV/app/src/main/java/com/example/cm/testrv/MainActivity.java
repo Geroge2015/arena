@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("Custom View");
         dataList.add("My Settings");
         dataList.add("request internet");
+        dataList.add("read contacts data");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -116,11 +117,17 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 9:
                 goInternet();
                 break;
+            case 10:
+                readContacts();
 
             default:
                 break;
 
         }
+    }
+
+    private void readContacts() {
+        KReadContactActivity.startActivity(this);
     }
 
     private void gotoSettings() {
