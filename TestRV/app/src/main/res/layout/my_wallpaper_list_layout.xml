@@ -19,6 +19,15 @@
     <ImageView
         android:id="@+id/test_image_view"
         android:layout_width="200dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:visibility="gone"/>
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/my_network_imageview"
+        android:background="#f0f"
+        android:layout_gravity="center"
+        android:scaleType="center"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
 
 </LinearLayout>

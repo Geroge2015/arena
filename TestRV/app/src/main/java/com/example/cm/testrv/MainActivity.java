@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.cm.testrv.anim.MyAnimationActivity;
 import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
+import com.example.cm.testrv.receiver.ChargeReceiver;
 import com.example.cm.testrv.service.MyLockerService;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addRecyclerView();
+        registerMyReceiver();
+    }
+
+    private void registerMyReceiver() {
+        ChargeReceiver.register(MyApplication.getAppContext());
     }
 
     private void addRecyclerView() {
@@ -166,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     @Override
     protected void onDestroy() {
         adapter.setOnItemClickListener(null);
+        ChargeReceiver.unRegister(MyApplication.getAppContext());
         super.onDestroy();
     }
 }

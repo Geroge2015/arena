@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cm.testrv.R;
@@ -61,30 +62,28 @@ public class MyWallPaperGalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_wallpaper_list_layout);
 //        initView();
-        testImageLoader();
+        testNwIv();
+    }
+
+
+
+
+
+    private void testNwIv() {
+        NetworkImageView iv = ((NetworkImageView) findViewById(R.id.my_network_imageview));
+        mQueue = Volley.newRequestQueue(getApplicationContext());
+        ImageLoader loader = new ImageLoader(mQueue, new BitmapCache());
+        iv.setDefaultImageResId(R.drawable.ic_panda);
+        iv.setErrorImageResId(R.drawable.ic_toys);
+        iv.setImageUrl(PNG_URL, loader);
     }
 
     private void testImageLoader() {
         final ImageView imageView = ((ImageView) findViewById(R.id.test_image_view));
         mQueue = Volley.newRequestQueue(getApplicationContext());
-        ImageLoader loader = new ImageLoader(mQueue, new ImageLoader.ImageCache() {
-            @Override
-            public Bitmap getBitmap(String url) {
-                return null;
-            }
-
-            @Override
-            public void putBitmap(String url, Bitmap bitmap) {
-
-            }
-        });
-
+        ImageLoader loader = new ImageLoader(mQueue, new BitmapCache());
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView, R.drawable.ic_panda, R.drawable.ic_toys);
-
         loader.get(PNG_URL, listener, 200, 200);
-
-
-
     }
 
     private void testImageRequest() {
