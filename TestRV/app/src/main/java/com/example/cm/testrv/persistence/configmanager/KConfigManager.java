@@ -1,4 +1,4 @@
-package com.example.cm.testrv.configmanager;
+package com.example.cm.testrv.persistence.configmanager;
 
 import android.content.Context;
 import android.content.SharedPreferences;

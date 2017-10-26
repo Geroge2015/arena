@@ -1,4 +1,4 @@
-package com.example.cm.testrv.configmanager;
+package com.example.cm.testrv.persistence.configmanager;
 
 /**
  * Created by cm on 2017/10/24.

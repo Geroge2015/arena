@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.cm.testrv.anim.MyAnimationActivity;
 import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
+import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
 import com.example.cm.testrv.service.MyLockerService;
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         dataList.add("My Settings");
         dataList.add("request internet");
         dataList.add("read contacts data");
+        dataList.add("test file data");
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -119,11 +121,18 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 break;
             case 10:
                 readContacts();
-
+                break;
+            case 11:
+                testFileData();
+                break;
             default:
                 break;
 
         }
+    }
+
+    private void testFileData() {
+        TestFileActivity.startActivity(this);
     }
 
     private void readContacts() {
