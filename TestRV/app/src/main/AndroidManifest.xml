@@ -34,6 +34,9 @@
         <activity android:name=".net.MyWallPaperGalleryActivity"/>
         <activity android:name=".KReadContactActivity" />
         <activity android:name=".persistence.TestFileActivity" />
+        <activity android:name=".requesthttp.MyEditTextActivity" />
+        <activity android:name=".requesthttp.MyHttpRequestActivity" />
+        <activity android:name=".requesthttp.MyWebViewActivity" />
     </application>
 
 </manifest>

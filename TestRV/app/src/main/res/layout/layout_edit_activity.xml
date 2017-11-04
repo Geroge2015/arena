@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:id="@+id/input_website_edit"
+            android:hint="Input your website"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:background="#00f"
+            android:id="@+id/search_btn"
+            android:text="Go"
+            android:textSize="20sp"
+            android:textColor="#E9993F"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webview_display"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+</LinearLayout>

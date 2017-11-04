@@ -17,12 +17,26 @@ import com.example.cm.testrv.anim.MyAnimationActivity;
 import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
 import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
+import com.example.cm.testrv.requesthttp.MyEditTextActivity;
 import com.example.cm.testrv.service.MyLockerService;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyOnItemClickListener{
 
+    private final String RECYCLERVIEW_DEMO = "RecyclerView Demo";
+    private final String VIEW_PAGER_DEMO = "ViewPager Demo";
+    private final String DEMO_FRAGMENT = "Fragment Demo";
+    private final String START_SERVICE = "Start Service";
+    private final String STOP_SERVICE = "Stop Service";
+    private final String BIND_SERVICE = "Bind Service";
+    private final String UNBIND_SERVICE = "UnBind Service";
+    private final String CUSTOM_VIEW = "Custom View";
+    private final String DEMO_MY_SETTINGS = "My Settings";
+    private final String DEMO_REQUEST_INTERNET = "request internet";
+    private final String DEMO_READ_CONTACTS_DATA = "read contacts data";
+    private final String DEMO_TEST_FILES_DATA = "test file data";
+    private final String GO_TO_INTERNET = "Go to internet !!!";
     private RecyclerView mListView;
     private ArrayList<String> dataList;
 
@@ -57,21 +71,18 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         ChargeReceiver.register(MyApplication.getAppContext());
     }
 
+
+    private enum enumItems {
+        RECYCLERVIEW_DEMO, VIEW_PAGER_DEMO, DEMO_FRAGMENT, START_SERVICE, STOP_SERVICE,
+        BIND_SERVICE, UNBIND_SERVICE, CUSTOM_VIEW, DEMO_MY_SETTINGS, DEMO_REQUEST_INTERNET,
+        DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET;
+    }
+
     private void addRecyclerView() {
         dataList = new ArrayList<>();
-
-        dataList.add("RecyclerView Demo");
-        dataList.add("ViewPager Demo");
-        dataList.add("Fragment Demo");
-        dataList.add("Start Service");
-        dataList.add("Stop Service");
-        dataList.add("Bind Service");
-        dataList.add("UnBind Service");
-        dataList.add("Custom View");
-        dataList.add("My Settings");
-        dataList.add("request internet");
-        dataList.add("read contacts data");
-        dataList.add("test file data");
+        for (enumItems e : enumItems.values()) {
+            dataList.add(e.toString());
+        }
         mListView = (RecyclerView) findViewById(R.id.my_recyclerview);
         mListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new MyCoolAdapter(dataList);
@@ -125,10 +136,16 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 11:
                 testFileData();
                 break;
+            case 12:
+                testHttpRequest();
             default:
                 break;
 
         }
+    }
+
+    private void testHttpRequest() {
+        MyEditTextActivity.startEditActivity(this);
     }
 
     private void testFileData() {
