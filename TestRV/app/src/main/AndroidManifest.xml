@@ -37,6 +37,7 @@
         <activity android:name=".requesthttp.MyEditTextActivity" />
         <activity android:name=".requesthttp.MyHttpRequestActivity" />
         <activity android:name=".requesthttp.MyWebViewActivity" />
+        <activity android:name=".persistence.MyNoteActivity" />
     </application>
 
 </manifest>
