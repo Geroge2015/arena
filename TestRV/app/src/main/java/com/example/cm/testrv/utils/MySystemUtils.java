@@ -17,7 +17,11 @@ import java.util.Locale;
 public class MySystemUtils {
 
     public static String getLanguage() {
-        return Locale.getDefault().getLanguage();
+        return Locale.getDefault().getLanguage().toLowerCase();
+    }
+
+    public static String getCountry() {
+        return Locale.getDefault().getCountry().toLowerCase();
     }
 
     public static String getFullNameLan() {

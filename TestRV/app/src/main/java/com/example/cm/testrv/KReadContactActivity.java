@@ -69,4 +69,14 @@ public class KReadContactActivity extends AppCompatActivity implements ContactLi
     public void onItemClick(View view, int position) {
         Toast.makeText(this,contactsList.get(position), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
 }

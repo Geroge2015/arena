@@ -26,7 +26,7 @@ import java.io.OutputStreamWriter;
 
 public class TestFileActivity extends AppCompatActivity {
 
-    EditText editText;
+    EditText mEditText;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, TestFileActivity.class);
@@ -41,17 +41,18 @@ public class TestFileActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        editText = ((EditText) findViewById(R.id.my_edit_text));
+        mEditText = ((EditText) findViewById(R.id.my_edit_text));
         String input = load();
         if (!TextUtils.isEmpty(input)) {
-            editText.setText(input);
-            editText.setSelection(input.length());
+            mEditText.setText(input);
+            mEditText.setSelection(input.length());
             Toast.makeText(this, "Restoring Succeeded !", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveData(String input) {
         FileOutputStream out = null;
+
         BufferedWriter writer = null;
         try {
             out = openFileOutput("data", Context.MODE_PRIVATE);
@@ -60,15 +61,14 @@ public class TestFileActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (writer != null) {
+            if (writer != null) {
+                try {
                     writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
-
     }
 
     private String load() {
@@ -102,7 +102,7 @@ public class TestFileActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        String input = editText.getText().toString();
+        String input = mEditText.getText().toString();
         saveData(input);
     }
 }

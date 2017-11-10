@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receiver.CampaignTrackingReceiver" />
         <service android:name=".service.MyLockerService"/>
         <activity android:name=".MySettingActivity"
             android:theme="@style/AppTheme1"/>
@@ -38,6 +39,11 @@
         <activity android:name=".requesthttp.MyHttpRequestActivity" />
         <activity android:name=".requesthttp.MyWebViewActivity" />
         <activity android:name=".persistence.MyNoteActivity" />
+
+        <provider
+            android:authorities="com.example.cm.testrv.provider"
+            android:name="com.example.cm.testrv.persistence.configmanager.DataBaseProvider" >
+        </provider>
     </application>
 
 </manifest>

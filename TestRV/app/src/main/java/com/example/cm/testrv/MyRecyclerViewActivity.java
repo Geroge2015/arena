@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cm.testrv.utils.MySystemUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -51,6 +53,8 @@ public class MyRecyclerViewActivity extends Activity implements MyCoolAdapter.My
         setHeaderView(mRecyclerView);
         setFooterView(mRecyclerView);
         mRecyclerView.setAdapter(adapter);
+        String language = MySystemUtils.getLanguage();
+        Toast.makeText(this, language, Toast.LENGTH_SHORT).show();
     }
 
     private void setHeaderView(RecyclerView view) {
