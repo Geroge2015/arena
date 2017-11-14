@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/notify_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/ic_panda" />
+
+    <TextView
+        android:id="@+id/notify_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@+id/notify_btn"
+        android:layout_toRightOf="@+id/notify_icon"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="#FF333333"
+        android:textSize="15dp"
+        tools:text="XX applications are consuming electricity!" />
+
+    <Button
+        android:id="@+id/notify_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/ic_toys"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
+        android:text="CLEAN"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14dp" />
+</RelativeLayout>

@@ -39,6 +39,7 @@
         <activity android:name=".requesthttp.MyHttpRequestActivity" />
         <activity android:name=".requesthttp.MyWebViewActivity" />
         <activity android:name=".persistence.MyNoteActivity" />
+        <activity android:name=".MyNotificationActivity" />
 
         <provider
             android:authorities="com.example.cm.testrv.provider"
