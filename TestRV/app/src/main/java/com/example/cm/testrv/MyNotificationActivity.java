@@ -15,6 +15,7 @@ import android.widget.RemoteViews;
 
 /**
  * Created by cm on 2017/11/14.
+ * 在通知栏上显示
  */
 
 public class MyNotificationActivity extends AppCompatActivity {
