@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import com.example.cm.testrv.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class TestFileActivity extends AppCompatActivity {
 
     private void initView() {
         mEditText = ((EditText) findViewById(R.id.my_edit_text));
-        String input = load();
+        String input = loadMyData();
         if (!TextUtils.isEmpty(input)) {
             mEditText.setText(input);
             mEditText.setSelection(input.length());
@@ -56,7 +58,8 @@ public class TestFileActivity extends AppCompatActivity {
         BufferedWriter writer = null;
         try {
             out = openFileOutput("data", Context.MODE_PRIVATE);
-            writer = new BufferedWriter(new OutputStreamWriter(out));
+            OutputStreamWriter osw = new OutputStreamWriter(out);
+            writer = new BufferedWriter(osw);
             writer.write(input);
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +72,67 @@ public class TestFileActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void saveMyData(String input) {
+        BufferedWriter bw = null;
+        String path = getFilePath(this);
+        Log.d("George", "File path :" + path);
+
+        try {
+            File file = new File(path);
+            FileOutputStream fos = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            bw = new BufferedWriter(osw);
+            bw.write(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private String getFilePath(Context context) {
+        return context.getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "test_data.log";
+    }
+
+    private String loadMyData() {
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+        String path = getFilePath(this);
+        File file = new File(path);
+        Log.d("George", "load .. path :" + path);
+        if (file.exists()) {
+            try {
+
+                FileInputStream fis = new FileInputStream(file);
+                InputStreamReader isr = new InputStreamReader(fis);
+                br = new BufferedReader(isr);
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return sb.toString();
+        }
+        return "";
     }
 
     private String load() {
@@ -103,6 +167,6 @@ public class TestFileActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         String input = mEditText.getText().toString();
-        saveData(input);
+        saveMyData(input);
     }
 }

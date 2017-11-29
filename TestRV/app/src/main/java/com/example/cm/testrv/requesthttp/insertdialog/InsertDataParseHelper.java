@@ -94,8 +94,8 @@ public class InsertDataParseHelper {
         try {
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
-            Object o = ois.readObject();
-            List<ReqDataBean> items = (List<ReqDataBean>) o;
+
+            List<ReqDataBean> items = (List<ReqDataBean>) ois.readObject();
             if (items != null && !items.isEmpty()) {
                 localInsertList.clear();
                 localInsertList.addAll(items);
