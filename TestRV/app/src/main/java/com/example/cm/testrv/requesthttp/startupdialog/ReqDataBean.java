@@ -1,4 +1,4 @@
-package com.example.cm.testrv.requesthttp.insertdialog;
+package com.example.cm.testrv.requesthttp.startupdialog;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -22,7 +22,6 @@ public class ReqDataBean implements Parcelable {
         this.endTime = in.readInt();
     }
 
-    //设置setter() 和 getter()方法  short cut:   alt + insert
     public int getType() {
         return type;
     }

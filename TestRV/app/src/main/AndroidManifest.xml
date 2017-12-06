@@ -41,6 +41,8 @@
         <activity android:name=".persistence.MyNoteActivity" />
         <activity android:name=".MyNotificationActivity" />
 
+        <receiver android:name=".notification.ShortcutBarReceiver" />
+
         <provider
             android:authorities="com.example.cm.testrv.provider"
             android:name="com.example.cm.testrv.persistence.configmanager.DataBaseProvider" >

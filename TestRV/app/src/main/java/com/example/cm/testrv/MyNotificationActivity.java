@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RemoteViews;
 
+import com.example.cm.testrv.notification.ShortcutBarReceiver;
+
 /**
  * Created by cm on 2017/11/14.
  * 在通知栏上显示
@@ -20,6 +22,7 @@ import android.widget.RemoteViews;
 
 public class MyNotificationActivity extends AppCompatActivity {
     private static final int LAUNCHER_NOTIFY_ID = 6789;
+    public static final String ACTION_SHORTCUTBAR_CLICK = "action_shortcutbar_click";
 
     private Button mNotiBtn;
 
@@ -41,39 +44,33 @@ public class MyNotificationActivity extends AppCompatActivity {
         mNotiBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendNotifications();
+                sendMyNotification();
             }
         });
 
     }
 
-    private void sendNotifications() {
-        NotificationManager notiMgr = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
-        Notification notification = createNotification();
-        if (notiMgr != null) {
-            notiMgr.notify(LAUNCHER_NOTIFY_ID, notification);
+    private void sendMyNotification() {
+        NotificationManager nm = ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE));
+        Notification notification = buildNotification();
+        if (null != nm) {
+            nm.notify(LAUNCHER_NOTIFY_ID, notification);
         }
-
     }
 
-    // from  MemoryAndBatteryNotification  cml
-    private Notification createNotification() {
-//        Notification notification = new Notification(R.drawable.ic_panda, "This is a ticker text", System.currentTimeMillis());
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, getIntent(), PendingIntent.FLAG_UPDATE_CURRENT);
+    private Notification buildNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
-        RemoteViews remoteViews = new RemoteViews(this.getPackageName(), R.layout.mem_bat_notify_layout);
-        builder.setContent(remoteViews);
-        remoteViews.setOnClickPendingIntent(R.id.notify_btn, pendingIntent);
+        Intent it = new Intent(this, ShortcutBarReceiver.class);
+        it.setAction(ACTION_SHORTCUTBAR_CLICK);
+        PendingIntent pi = PendingIntent.getBroadcast(this, 9, it, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setAutoCancel(false)
-                .setWhen(System.currentTimeMillis())
                 .setOngoing(false)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_panda)
-                .setContentIntent(pendingIntent);
-
+                .setContentIntent(pi);
         return builder.build();
     }
 }

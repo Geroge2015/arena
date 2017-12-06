@@ -21,6 +21,15 @@ public class KeyGuardUtils {
     private static KeyguardManager keyguardMgr;
 
 
+    public static boolean isKeyGuardShow(Context context) {
+        if (keyguardMgr == null) {
+            keyguardMgr = (KeyguardManager) context
+                    .getSystemService(Context.KEYGUARD_SERVICE);
+        }
+        return keyguardMgr.inKeyguardRestrictedInputMode();
+    }
+
+
     public static boolean getKeyguardSecure(Context context) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (keyguardMgr == null) {

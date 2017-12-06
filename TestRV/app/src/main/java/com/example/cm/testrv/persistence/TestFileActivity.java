@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 /**
@@ -52,28 +53,6 @@ public class TestFileActivity extends AppCompatActivity {
         }
     }
 
-    private void saveData(String input) {
-        FileOutputStream out = null;
-
-        BufferedWriter writer = null;
-        try {
-            out = openFileOutput("data", Context.MODE_PRIVATE);
-            OutputStreamWriter osw = new OutputStreamWriter(out);
-            writer = new BufferedWriter(osw);
-            writer.write(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private void saveMyData(String input) {
         BufferedWriter bw = null;
         String path = getFilePath(this);
@@ -96,11 +75,6 @@ public class TestFileActivity extends AppCompatActivity {
                 }
             }
         }
-
-    }
-
-    private String getFilePath(Context context) {
-        return context.getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "test_data.log";
     }
 
     private String loadMyData() {
@@ -111,7 +85,6 @@ public class TestFileActivity extends AppCompatActivity {
         Log.d("George", "load .. path :" + path);
         if (file.exists()) {
             try {
-
                 FileInputStream fis = new FileInputStream(file);
                 InputStreamReader isr = new InputStreamReader(fis);
                 br = new BufferedReader(isr);
@@ -135,22 +108,47 @@ public class TestFileActivity extends AppCompatActivity {
         return "";
     }
 
-    private String load() {
-        FileInputStream in = null;
-        BufferedReader reader = null;
-        StringBuilder content = new StringBuilder();
-
+    private void save(String data) {
+        BufferedWriter bwriter = null;
         try {
-            in = openFileInput("data");
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            FileOutputStream fos = openFileOutput("data", MODE_PRIVATE);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            bwriter = new BufferedWriter(osw);
+            bwriter.write(data);
+//            osw.close();
+//            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bwriter != null) {
+                try {
+                    bwriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
+        }
+    }
+
+    private String getFilePath(Context context) {
+        return context.getApplicationContext().getFilesDir().getAbsolutePath() + File.separator + "test_data.log";
+    }
+
+    private String load() {
+        BufferedReader reader = null;
+        StringBuilder sb = new StringBuilder();
+        try {
+            FileInputStream fis = openFileInput("data");
+            InputStreamReader isr = new InputStreamReader(fis);
+            reader = new BufferedReader(isr);
+            String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line);
+                sb.append(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();
@@ -159,9 +157,8 @@ public class TestFileActivity extends AppCompatActivity {
                 }
             }
         }
-        return content.toString();
+        return sb.toString();
     }
-
 
     @Override
     protected void onDestroy() {
