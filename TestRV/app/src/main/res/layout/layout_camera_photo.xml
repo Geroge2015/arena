@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/capture_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take A Photo"
+        android:textSize="18sp"
+        tools:background="#f00"/>
+
+    <Button
+        android:id="@+id/choose_from_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHOOSE FROM ALBUM"
+        tools:background="#0f0"
+        android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/photo_display_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        tools:background="#00f"/>
+
+</LinearLayout>

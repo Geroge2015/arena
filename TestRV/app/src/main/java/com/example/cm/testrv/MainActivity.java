@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.cm.testrv.anim.MyAnimationActivity;
+import com.example.cm.testrv.media.MyCameraActivity;
 import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
 import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
     private enum enumItems {
         RECYCLERVIEW_DEMO, VIEW_PAGER_DEMO, DEMO_FRAGMENT, START_SERVICE, STOP_SERVICE,
         BIND_SERVICE, UNBIND_SERVICE, CUSTOM_VIEW, DEMO_MY_SETTINGS, DEMO_REQUEST_INTERNET,
-        DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET,SEND_NOTIFICATION
+        DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET,SEND_NOTIFICATION, CAMERA_PHOTO
     }
 
     private void addRecyclerView() {
@@ -142,10 +143,17 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 13:
                 sendNotification();
                 break;
+            case 14:
+                startCamera();
+                break;
             default:
                 break;
 
         }
+    }
+
+    private boolean startCamera() {
+        return MyCameraActivity.startActivity(this);
     }
 
     private void sendNotification() {
