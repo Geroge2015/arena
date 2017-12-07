@@ -42,6 +42,7 @@
         <activity android:name=".persistence.MyNoteActivity" />
         <activity android:name=".MyNotificationActivity" />
         <activity android:name=".media.MyCameraActivity" />
+        <activity android:name=".media.MyMediaActivity" />
 
         <receiver android:name=".notification.ShortcutBarReceiver" />
 

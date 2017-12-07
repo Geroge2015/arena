@@ -77,6 +77,11 @@ public class MyCameraActivity extends AppCompatActivity {
                 }
             }
         });
+
+       // test lambda
+//        new Thread(() -> {
+//            // do things.
+//        }).start();
     }
 
     @Override
@@ -95,8 +100,8 @@ public class MyCameraActivity extends AppCompatActivity {
     }
 
     private void openAlbum() {
-        Intent intent = new Intent("android.intent.action.GET_CONTENT");
-        intent.setType("image/*");
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);    // "android.intent.action.GET_CONTENT"
+        intent.setType("image/*");        // 查看类型，如果是其他类型，比如视频则替换成 video/*，或 */*
         startActivityForResult(intent, CHOOSE_PHOTO);    // open the album.
     }
 
