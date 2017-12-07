@@ -152,7 +152,7 @@ public class MyCameraActivity extends AppCompatActivity {
     }
 
     @TargetApi(19)
-    private void handleImageBeforeKitKat(Intent data) {
+    private void handleImageOnKitKat(Intent data) {
         String imagePath = null;
         Uri uri = data.getData();
         if (DocumentsContract.isDocumentUri(this, uri)) {
@@ -199,7 +199,7 @@ public class MyCameraActivity extends AppCompatActivity {
         return path;
     }
 
-    private void handleImageOnKitKat(Intent data) {
+    private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
         String imagePath = getImagePath(uri, null);
         displayImage(imagePath);
