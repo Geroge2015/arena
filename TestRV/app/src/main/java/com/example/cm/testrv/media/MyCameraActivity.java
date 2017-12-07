@@ -6,6 +6,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -34,7 +35,6 @@ import java.io.IOException;
 
 /**
  * Created by George on 2017/12/6.
- *
  */
 
 public class MyCameraActivity extends AppCompatActivity {
@@ -53,7 +53,6 @@ public class MyCameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_camera_photo);
         init();
-
     }
 
     private void init() {
@@ -93,7 +92,6 @@ public class MyCameraActivity extends AppCompatActivity {
             default:
                 break;
         }
-
     }
 
     private void openAlbum() {
@@ -124,7 +122,6 @@ public class MyCameraActivity extends AppCompatActivity {
         Intent it = new Intent("android.media.action.IMAGE_CAPTURE");
         it.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(it, TAKE_PHOTO);
-
     }
 
     @Override
@@ -149,13 +146,9 @@ public class MyCameraActivity extends AppCompatActivity {
                         handleImageBeforeKitKat(data);
                     }
                 }
-
             default:
                 break;
-
         }
-
-
     }
 
     @TargetApi(19)
@@ -184,19 +177,31 @@ public class MyCameraActivity extends AppCompatActivity {
     }
 
     private void displayImage(String imagePath) {
-
+        if (imagePath != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            pic.setImageBitmap(bitmap);
+        } else {
+            Toast.makeText(this, "Failed to get Image", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
-    private String getImagePath(Uri externalContentUri, String selection) {
-
-
-        return null;
+    private String getImagePath(Uri uri, String selection) {
+        String path = null;
+        //retrieve the picture path via uri and selection
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            }
+            cursor.close();
+        }
+        return path;
     }
 
     private void handleImageOnKitKat(Intent data) {
-
-
-
+        Uri uri = data.getData();
+        String imagePath = getImagePath(uri, null);
+        displayImage(imagePath);
     }
 }
