@@ -35,6 +35,13 @@ public class MySystemUtils {
         return dm.heightPixels;
     }
 
+    public static int getFullScreenWidth(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
+    }
+
 
     public static int getStartEndHour(String span, boolean isStart, int defTime) {
         if (!TextUtils.isEmpty(span)) {

@@ -43,6 +43,7 @@
         <activity android:name=".MyNotificationActivity" />
         <activity android:name=".media.MyCameraActivity" />
         <activity android:name=".media.MyMediaActivity" />
+        <activity android:name=".requesthttp.MyRetrievePhotoActivity" />
 
         <receiver android:name=".notification.ShortcutBarReceiver" />
 

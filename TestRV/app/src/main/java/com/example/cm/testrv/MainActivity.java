@@ -20,6 +20,7 @@ import com.example.cm.testrv.net.MyWallPaperGalleryActivity;
 import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
 import com.example.cm.testrv.requesthttp.MyEditTextActivity;
+import com.example.cm.testrv.requesthttp.MyRetrievePhotoActivity;
 import com.example.cm.testrv.service.MyLockerService;
 import com.example.cm.testrv.utils.CommonUtils;
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         RECYCLERVIEW_DEMO, VIEW_PAGER_DEMO, DEMO_FRAGMENT, START_SERVICE, STOP_SERVICE,
         BIND_SERVICE, UNBIND_SERVICE, CUSTOM_VIEW, DEMO_MY_SETTINGS, DEMO_REQUEST_INTERNET,
         DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET,SEND_NOTIFICATION, CAMERA_PHOTO,
-        VIDEO_MUSIC_PLAY
+        VIDEO_MUSIC_PLAY, DOWNLOAD_IMAGE_RESIZE
     }
 
     private void addRecyclerView() {
@@ -151,10 +152,16 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 break;
             case 15:
                 playMusicVideo();
+            case 16:
+                downloadPhoto();
             default:
                 break;
 
         }
+    }
+
+    private void downloadPhoto() {
+        MyRetrievePhotoActivity.startActivity(this);
     }
 
     private void playMusicVideo() {
