@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/insert_root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/ic_panda" />
+
+            <com.cleanmaster.ui.RobotoTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="48dp"
+                android:gravity="center_vertical"
+                android:text="@string/cm_launcher_name"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:familyName="@string/sans_serif_light" />
+
+            <ImageView
+                android:id="@+id/insert_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_settings_inner" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/iv_set"
+                android:src="@drawable/test1"
+                android:layout_marginRight="60dp"
+                android:layout_gravity="right|center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/insert_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/insert_button"
+        android:layout_width="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom=""
+        android:text="@string/insert_tap_to_home"
+        android:fontFamily="sans-serif"
+        android:textColor="#0086DC"
+        android:textSize="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#44000000"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:visibility="visible"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</FrameLayout>

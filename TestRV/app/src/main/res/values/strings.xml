@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Arena</string>
+    <string name="insert_tap_to_home">TAP TO HOME</string>
+
 </resources>

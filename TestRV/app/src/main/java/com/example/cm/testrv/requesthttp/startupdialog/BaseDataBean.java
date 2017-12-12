@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by cm on 2017/11/30.
+ * Created by George on 2017/11/30.
  */
 
 public class BaseDataBean implements Parcelable {
