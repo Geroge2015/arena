@@ -77,6 +77,25 @@ public class BaseDataParseHelper {
         }
     }
 
+    public static BaseDataBean parseBaseData(JSONObject object) {
+        return parseBaseData(object, 0, 0, 0);
+    }
+
+    public static BaseDataBean parseBaseData(JSONObject object, int type, int startTime, int endTime) {
+
+        BaseDataBean bean = new BaseDataBean();
+        bean.setType(type);
+        bean.setStartTime(startTime);
+        bean.setEndTime(endTime);
+        String cover_url = object.optString(KEY_SUB_COVER_URL);
+        String thumb_url = object.optString(KEY_SUB_THUMB_URL);
+        bean.setCoverUrl(cover_url);
+        bean.setThumbUrl(thumb_url);
+
+        return bean;
+
+    }
+
 
 
 

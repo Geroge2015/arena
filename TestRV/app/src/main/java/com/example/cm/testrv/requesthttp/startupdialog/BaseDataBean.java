@@ -14,6 +14,10 @@ public class BaseDataBean implements Parcelable {
     int startTime;
     int endTime;
 
+    public BaseDataBean() {
+
+    }
+
     public BaseDataBean(Parcel bean) {
         this.type = bean.readInt();
         this.coverUrl = bean.readString();

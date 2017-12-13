@@ -3,6 +3,7 @@
     <declare-styleable name="MyTextView">
         <attr name="text" format="string" />
         <attr name="testAttr" format="integer" />
+        <attr name="familyName" format="reference|string" />
     </declare-styleable>
 
 

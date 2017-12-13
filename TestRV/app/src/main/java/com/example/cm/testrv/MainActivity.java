@@ -21,6 +21,8 @@ import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
 import com.example.cm.testrv.requesthttp.MyEditTextActivity;
 import com.example.cm.testrv.requesthttp.MyRetrievePhotoActivity;
+import com.example.cm.testrv.requesthttp.startupdialog.BaseDataBean;
+import com.example.cm.testrv.requesthttp.startupdialog.BaseDataParseHelper;
 import com.example.cm.testrv.service.MyLockerService;
 import com.example.cm.testrv.utils.CommonUtils;
 

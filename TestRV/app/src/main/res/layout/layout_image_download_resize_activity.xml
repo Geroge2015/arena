@@ -3,12 +3,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/load_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="loadImage"
-        android:text="Glide the image"/>
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/load_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:onClick="loadImage"
+            android:text="Glide the image"/>
+
+        <Button
+            android:id="@+id/retrieve_data"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:text="Retrieve data"/>
+
+        <Button
+            android:id="@+id/show_dlg_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp"
+
+            android:onClick="showHelloDialog"
+            android:text="SHOW HELLO Dialog"/>
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/resize_imageview"
