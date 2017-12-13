@@ -22,8 +22,7 @@ public class BastDataRequestHelper {
     private static RequestQueue mQueue = Volley.newRequestQueue(MyApplication.getAppContext());
     private static final int REQUEST_TIMEOUT_MS = 30000;
 
-    private static final String INSERT_BASE_URL = "http://cml.ksmobile.com/";
-    public static final String TYPE_INTERFACE = "start-config/getlist?";
+
 
     public static void requestBaseData(Context context, DataRequestListener listener) {
         BaseDataRequest request = new BaseDataRequest(getUrl(), new Response.Listener<JSONObject>() {
@@ -59,9 +58,7 @@ public class BastDataRequestHelper {
 
     private static String getUrl() {
         StringBuilder builder = new StringBuilder();
-        builder.append(INSERT_BASE_URL)
-                .append(TYPE_INTERFACE)
-                .append("mcc=")
+        builder.append("mcc=")
                 .append("313");
         String url = builder.toString();
         Log.d("George9999", " url : " + url);
