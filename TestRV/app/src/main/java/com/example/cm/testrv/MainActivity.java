@@ -23,10 +23,14 @@ import com.example.cm.testrv.requesthttp.MyEditTextActivity;
 import com.example.cm.testrv.requesthttp.MyRetrievePhotoActivity;
 import com.example.cm.testrv.requesthttp.startupdialog.BaseDataBean;
 import com.example.cm.testrv.requesthttp.startupdialog.BaseDataParseHelper;
+import com.example.cm.testrv.requesthttp.startupdialog.KStartUpPageHelper;
 import com.example.cm.testrv.service.MyLockerService;
 import com.example.cm.testrv.utils.CommonUtils;
+import com.example.cm.testrv.utils.MySystemUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyOnItemClickListener{
 
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         RECYCLERVIEW_DEMO, VIEW_PAGER_DEMO, DEMO_FRAGMENT, START_SERVICE, STOP_SERVICE,
         BIND_SERVICE, UNBIND_SERVICE, CUSTOM_VIEW, DEMO_MY_SETTINGS, DEMO_REQUEST_INTERNET,
         DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET,SEND_NOTIFICATION, CAMERA_PHOTO,
-        VIDEO_MUSIC_PLAY, DOWNLOAD_IMAGE_RESIZE
+        VIDEO_MUSIC_PLAY, DOWNLOAD_IMAGE_RESIZE, REQUEST_START_UP_PAGE
     }
 
     private void addRecyclerView() {
@@ -154,12 +158,21 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 break;
             case 15:
                 playMusicVideo();
+                break;
             case 16:
                 downloadPhoto();
+                break;
+            case 17:
+                requestStartPage();
+                break;
             default:
                 break;
 
         }
+    }
+
+    private void requestStartPage() {
+        KStartUpPageHelper.requestConfigFileIfNeed(this);
     }
 
     private void downloadPhoto() {
@@ -223,9 +236,49 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
 
     private void jumpToViewPager() {
         MyViewPagerActivity.startMyViewPagerActivity(this);
+        MySystemUtils.getDate();
+        ArrayList<String> list = new MyArrayList();
+        list.add("111111");
+        list.add("222222");
+        list.add("aaaaaa");
+        list.add("kkkkkk");
+        String string = list.toString();
+        Log.d("George2018", " array list to string " + string);
+        String[] split = string.split(",");
+        Log.d("George2018", "split 0 " + split[0]);
+        Log.d("George2018", "split 1 " + split[1]);
+        ArrayList<String> arraylist = new ArrayList<>(Arrays.asList(split));
+        Log.d("George2018", " arraylist 0 " + arraylist.get(0));
+        Log.d("George2018", " arraylist 1 " + arraylist.get(1));
+    }
+
+
+    public class MyArrayList extends ArrayList {
+        @Override
+        public String toString() {
+            if (isEmpty()) {
+                return "";
+            }
+
+            StringBuilder buffer = new StringBuilder(size() * 16);
+            Iterator<?> it = iterator();
+            while (it.hasNext()) {
+                Object next = it.next();
+                if (next != this) {
+                    buffer.append(next);
+                } else {
+                    buffer.append("(this Collection)");
+                }
+                if (it.hasNext()) {
+                    buffer.append(",");
+                }
+            }
+            return buffer.toString();
+        }
     }
 
     public void getPhonePrams(Context context) {
+
         width = context.getResources().getDisplayMetrics().widthPixels;
         height = context.getResources().getDisplayMetrics().heightPixels;
     }

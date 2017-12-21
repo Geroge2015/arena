@@ -1,6 +1,7 @@
 package com.example.cm.testrv.requesthttp.startupdialog;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,7 +16,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Created by cm on 2017/11/30.
@@ -41,41 +44,72 @@ public class BaseDataParseHelper {
     private static boolean updateInsertConfig = true;
     private static int status = 1;
 
-    public static void saveConfigData(Context context, JSONObject jsonObject) {
+    public static void saveConfigData(Context context, final JSONObject jsonObject) {
         if (jsonObject != null) {
 
-            List<BaseConfigBean> configList = new ArrayList<>();
+            Runnable runnable = new Runnable() {
 
-            try {
-                String updateTime = jsonObject.optString(KEY_CONFIG_UPDATE_TIME);
+                @Override
+                public void run() {
+                    List<BaseConfigBean> configList = new ArrayList<>();
 
-                String nextUrl = jsonObject.optString(KEY_CONFIG_NEXT_URL);
+                    try {
+                        String updateTime = jsonObject.optString(KEY_CONFIG_UPDATE_TIME);
 
-                JSONArray list = jsonObject.getJSONArray(KEY_CONFIG_LIST);
-                if (list == null || list.length() == 0) {
-                    return;
+                        String nextUrl = jsonObject.optString(KEY_CONFIG_NEXT_URL);
+
+                        JSONArray list = jsonObject.getJSONArray(KEY_CONFIG_LIST);
+                        if (list == null || list.length() == 0) {
+                            return;
+                        }
+                        int lenth = list.length();
+                        for (int i = 0; i < lenth; i++) {
+                            JSONObject object = ((JSONObject) list.get(i));
+                            int id = object.optInt(KEY_CONFIG_ID);
+                            int pid = object.optInt(KEY_CONFIG_PID);
+                            int cid = object.optInt(KEY_CONFIG_CID);
+                            int st = object.optInt(KEY_CONFIG_ST_TIME);
+
+
+
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
+                    }
                 }
-                int lenth = list.length();
-                for (int i = 0; i < lenth; i++) {
-                    JSONObject object = ((JSONObject) list.get(i));
-                    int id = object.optInt(KEY_CONFIG_ID);
-                    int pid = object.optInt(KEY_CONFIG_PID);
-                    int cid = object.optInt(KEY_CONFIG_CID);
-                    int st = object.optInt(KEY_CONFIG_ST_TIME);
+            };
 
-
-
-
+            ThreadFactory threadFactory = new ThreadFactory() {
+                @Override
+                public Thread newThread(@NonNull Runnable r) {
+                    return null;
                 }
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-            }
-
-
+            };
         }
     }
+
+    public class MyThreadFactory implements ThreadFactory {
+
+        private int counter;
+        private String prefix;
+
+        public MyThreadFactory(String prefix) {
+            this.prefix = prefix;
+            counter = 1;
+        }
+
+        @Override
+        public Thread newThread(@NonNull Runnable r) {
+            return null;
+        }
+    }
+
+
+
 
     public static BaseDataBean parseBaseData(JSONObject object) {
         return parseBaseData(object, 0, 0, 0);
