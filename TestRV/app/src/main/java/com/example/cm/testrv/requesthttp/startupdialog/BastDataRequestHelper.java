@@ -44,7 +44,13 @@ public class BastDataRequestHelper {
             @Override
             public void onResponse(JSONObject response) {
                 if (response != null) {
-                    BaseDataParseHelper.saveConfigData(context, response);
+                    JSONObject defConfigData = null;
+                    try {
+                        defConfigData = new JSONObject(DEFAULT_CONFIG_FILE);
+                        BaseDataParseHelper.saveConfigData(context, defConfigData);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }
@@ -52,8 +58,8 @@ public class BastDataRequestHelper {
             @Override
             public void onErrorResponse(VolleyError error) {
                 try {
-                    JSONObject configData = new JSONObject(DEFAULT_CONFIG_FILE);
-                    BaseDataParseHelper.saveConfigData(context, configData);
+                    JSONObject defConfigData = new JSONObject(DEFAULT_CONFIG_FILE);
+                    BaseDataParseHelper.saveConfigData(context, defConfigData);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -68,8 +74,8 @@ public class BastDataRequestHelper {
 
     private static String getDataRequestUrl(Context context) {
         StringBuilder builder = new StringBuilder();
-        builder.append(INSERT_BASE_URL).append(TYPE_INTERFACE).append("mcc=").append("123")
-//                .append("&apkver=").append(KPackageManager.getPackageVersion(context, context.getPackageName()))
+        builder.append(INSERT_BASE_URL).append(TYPE_INTERFACE).append("mcc=").append("310")
+                .append("&apkver=").append("51400")
                 .append("&aid=").append("9");
         final String url = builder.toString();
         return url;

@@ -44,7 +44,8 @@ public class MyThread extends Thread {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append(":").append(" Creation Date: ").append(creationDate).append(" Start Date: ");
+        builder.append(getName()).append(":").append(" Creation Date: ").append(creationDate).append(", Running Time: ")
+        .append(getExecutionTime()).append(" Milliseconds");
         return builder.toString();
     }
 }

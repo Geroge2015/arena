@@ -160,7 +160,8 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 playMusicVideo();
                 break;
             case 16:
-                downloadPhoto();
+//                downloadPhoto();
+                BaseDataParseHelper.getConfigDataFromFile(MyApplication.getAppContext());
                 break;
             case 17:
                 requestStartPage();

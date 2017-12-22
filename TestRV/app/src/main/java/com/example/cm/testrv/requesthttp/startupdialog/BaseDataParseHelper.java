@@ -1,24 +1,26 @@
 package com.example.cm.testrv.requesthttp.startupdialog;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.example.cm.testrv.utils.mythread.MyThreadFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadFactory;
 
 /**
  * Created by cm on 2017/11/30.
@@ -52,7 +54,7 @@ public class BaseDataParseHelper {
                 @Override
                 public void run() {
                     List<BaseConfigBean> configList = new ArrayList<>();
-
+                    Log.d("George999", "runnable: configlist is array list");
                     try {
                         String updateTime = jsonObject.optString(KEY_CONFIG_UPDATE_TIME);
 
@@ -69,12 +71,21 @@ public class BaseDataParseHelper {
                             int pid = object.optInt(KEY_CONFIG_PID);
                             int cid = object.optInt(KEY_CONFIG_CID);
                             int st = object.optInt(KEY_CONFIG_ST_TIME);
+                            int et = object.optInt(KEY_CONFIG_END_TIME);
 
-
-
-
+                            BaseConfigBean.Builder builder = new BaseConfigBean.Builder();
+                            builder.setId(id)
+                                    .setClassId(pid)
+                                    .setSubClassId(cid)
+                                    .setStartTime(st)
+                                    .setEndTime(et)
+                                    .setBeginDate(0)
+                                    .setExpireDate(Long.MAX_VALUE);
+                            final BaseConfigBean baseConfigBean = builder.build();
+                            configList.add(baseConfigBean);
                         }
-
+                        Collections.sort(configList, new BaseBeanComparator());
+                        writeConfigDataToFile(context, configList);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } finally {
@@ -82,30 +93,127 @@ public class BaseDataParseHelper {
                 }
             };
 
-            ThreadFactory threadFactory = new ThreadFactory() {
-                @Override
-                public Thread newThread(@NonNull Runnable r) {
-                    return null;
-                }
-
-            };
+            MyThreadFactory myThreadFactory = new MyThreadFactory("MyTestThreadFactory");
+            Thread thread = myThreadFactory.newThread(runnable);
+            thread.start();
         }
     }
 
-    public class MyThreadFactory implements ThreadFactory {
+    private static void writeConfigDataToFile(Context context, List<BaseConfigBean> configList) {
+        final String path = getFilePath(context);
+        Log.d("George999", "path   " + path);
 
-        private int counter;
-        private String prefix;
+        FileOutputStream fos = null;
+        BufferedOutputStream buffer = null;
+        ObjectOutputStream oos = null;
+        Log.d("George999", "config list:  " + configList);
 
-        public MyThreadFactory(String prefix) {
-            this.prefix = prefix;
-            counter = 1;
+        try {
+            //序列化文件輸出流
+            fos = new FileOutputStream(path);
+            //构建缓冲流
+            buffer = new BufferedOutputStream(fos);
+            //构建字符输出的对象流
+            oos = new ObjectOutputStream(buffer);
+            oos.writeObject(configList);
+            Log.d("George999", "writeConfigDataToFile  succeed :) ");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (buffer != null) {
+                try {
+                    buffer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
+    }
+
+    public static class BaseBeanComparator implements Comparator<BaseConfigBean> {
         @Override
-        public Thread newThread(@NonNull Runnable r) {
-            return null;
+        public int compare(BaseConfigBean lhs, BaseConfigBean rhs) {
+            if (lhs.startTime == rhs.startTime) {
+                if (lhs.endTime == rhs.endTime) {
+                    return lhs.subClassId - rhs.subClassId;
+                } else {
+                    return lhs.endTime - rhs.endTime;
+                }
+            } else {
+                return lhs.startTime - rhs.startTime;
+            }
         }
+    }
+
+    public static List<BaseConfigBean> getConfigDataFromFile(Context context) {
+        String path = getFilePath(context);
+        Log.d("George999", "get from file path : " + path);
+
+        final File file = new File(path);
+        Log.d("George999", "   file  : " + file.toString());
+        Log.d("George999", " file  : " + file.length());
+
+        if (!file.exists()) {
+            Log.d("George999", "   EMPTY : ");
+            return new ArrayList<>();
+        }
+        FileInputStream fis = null;
+        BufferedInputStream buffer = null;
+        ObjectInputStream ois = null;
+        List<BaseConfigBean> configList = new ArrayList<>();
+        try {
+            fis = new FileInputStream(file);
+            buffer = new BufferedInputStream(fis);
+            ois = new ObjectInputStream(buffer);
+            Log.d("George999", "new ObjectInputStream : " + ois);
+            Object o = ois.readObject();
+            return configList = ((List<BaseConfigBean>) o);
+        } catch (IOException e) {
+            Log.d("George999", "new ObjectInputStream : " + ois);
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (buffer != null) {
+                try {
+                    buffer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return new ArrayList<>();
     }
 
 
@@ -130,62 +238,13 @@ public class BaseDataParseHelper {
 
     }
 
-
-
-
-
-    public static void saveBaseDataToFile(Context context, List<BaseDataBean> items) {
-        String path = getFilePath(context);
-        Log.d("George", " the path is :" + path);
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try {
-            fos = new FileOutputStream(path);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(items);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (oos != null) {
-                try {
-                    oos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     public static String getFilePath(Context context) {
         if (context != null) {
-            return context.getFilesDir().getAbsolutePath() + File.separator + "my_data_file";
+            String path = context.getFilesDir().getAbsolutePath() + File.separator + "my_data_file.ser";
+            return path;
         }
         return "";
     }
-
-
-    private static class BaseDataComparator implements Comparator<BaseConfigBean> {
-        @Override
-        public int compare(BaseConfigBean lhs, BaseConfigBean rhs) {
-            if (lhs.startTime != rhs.startTime) {
-                return lhs.startTime - rhs.startTime;
-            } else {
-                if (lhs.endTime != rhs.endTime) {
-                    return lhs.endTime - rhs.endTime;
-                } else {
-                    return lhs.subClassId - rhs.subClassId;
-                }
-            }
-        }
-    }
-
 
 
 

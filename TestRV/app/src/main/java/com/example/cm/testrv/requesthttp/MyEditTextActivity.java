@@ -48,7 +48,7 @@ public class MyEditTextActivity extends AppCompatActivity {
 
     private void openWebSite() {
         String string = mEditText.getEditableText().toString();
-        mWebView.getSettings().setJavaScriptEnabled(true);
+
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -19,6 +19,13 @@ public class BaseConfigBean implements Serializable {
     public BaseConfigBean() {
     }
 
+    @Override
+    public String toString() {
+        return "BaseConfigBean : id = " + id + " classId = " + classId + " subClassId = " + subClassId
+                + " startTime = " + startTime + " endTime = " + endTime + "beginDate = " + beginDate
+                + " expireDate = " + expireDate;
+    }
+
     public static class Builder {
         BaseConfigBean configBean;
 
