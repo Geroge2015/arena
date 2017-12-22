@@ -104,7 +104,7 @@ public class BaseDataParseHelper {
         Log.d("George999", "path   " + path);
 
         FileOutputStream fos = null;
-        BufferedOutputStream buffer = null;
+//        BufferedOutputStream buffer = null;
         ObjectOutputStream oos = null;
         Log.d("George999", "config list:  " + configList);
 
@@ -112,9 +112,9 @@ public class BaseDataParseHelper {
             //序列化文件輸出流
             fos = new FileOutputStream(path);
             //构建缓冲流
-            buffer = new BufferedOutputStream(fos);
+//            buffer = new BufferedOutputStream(fos);
             //构建字符输出的对象流
-            oos = new ObjectOutputStream(buffer);
+            oos = new ObjectOutputStream(fos);
             oos.writeObject(configList);
             Log.d("George999", "writeConfigDataToFile  succeed :) ");
         } catch (IOException e) {
@@ -123,20 +123,24 @@ public class BaseDataParseHelper {
             if (fos != null) {
                 try {
                     fos.close();
+                    Log.d("George999", "fos.close(); ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (buffer != null) {
-                try {
-                    buffer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (buffer != null) {
+//                try {
+//                    buffer.close();
+//                    Log.d("George999", "buffer.close(); ");
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             if (oos != null) {
                 try {
                     oos.close();
+                    Log.d("George999", "oos.close(); ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -174,19 +178,20 @@ public class BaseDataParseHelper {
             return new ArrayList<>();
         }
         FileInputStream fis = null;
-        BufferedInputStream buffer = null;
+//        BufferedInputStream buffer = null;
         ObjectInputStream ois = null;
         List<BaseConfigBean> configList = new ArrayList<>();
         try {
             fis = new FileInputStream(file);
-            buffer = new BufferedInputStream(fis);
-            ois = new ObjectInputStream(buffer);
-            Log.d("George999", "new ObjectInputStream : " + ois);
+            Log.d("George999", " new FileInputStream   : " + fis);
+//            buffer = new BufferedInputStream(fis);
+//            Log.d("George999", " new BufferedInputStream   : " + buffer);
+            ois = new ObjectInputStream(fis);
+            Log.d("George999", " new ObjectInputStream : " + ois);
             Object o = ois.readObject();
             return configList = ((List<BaseConfigBean>) o);
         } catch (IOException e) {
-            Log.d("George999", "new ObjectInputStream : " + ois);
-
+            Log.d("George999", "new ObjectInputStream : " + e);
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -198,13 +203,13 @@ public class BaseDataParseHelper {
                     e.printStackTrace();
                 }
             }
-            if (buffer != null) {
-                try {
-                    buffer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+//            if (buffer != null) {
+//                try {
+//                    buffer.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
             if (ois != null) {
                 try {
                     ois.close();

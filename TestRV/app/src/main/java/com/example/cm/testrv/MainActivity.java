@@ -21,6 +21,7 @@ import com.example.cm.testrv.persistence.TestFileActivity;
 import com.example.cm.testrv.receiver.ChargeReceiver;
 import com.example.cm.testrv.requesthttp.MyEditTextActivity;
 import com.example.cm.testrv.requesthttp.MyRetrievePhotoActivity;
+import com.example.cm.testrv.requesthttp.startupdialog.BaseConfigBean;
 import com.example.cm.testrv.requesthttp.startupdialog.BaseDataBean;
 import com.example.cm.testrv.requesthttp.startupdialog.BaseDataParseHelper;
 import com.example.cm.testrv.requesthttp.startupdialog.KStartUpPageHelper;
@@ -31,6 +32,7 @@ import com.example.cm.testrv.utils.MySystemUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyOnItemClickListener{
 
@@ -161,7 +163,9 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
                 break;
             case 16:
 //                downloadPhoto();
-                BaseDataParseHelper.getConfigDataFromFile(MyApplication.getAppContext());
+                List<BaseConfigBean> list = BaseDataParseHelper.getConfigDataFromFile(MyApplication.getAppContext());
+                Log.d("George999" , "The result : " + list);
+                Log.d("George999" , "The result : " + list.toString());
                 break;
             case 17:
                 requestStartPage();
