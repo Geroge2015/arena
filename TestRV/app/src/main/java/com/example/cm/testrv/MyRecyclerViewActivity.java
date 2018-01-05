@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cm.testrv.dragsettings.SimpleItemTouchHelperCallback;
 import com.example.cm.testrv.utils.MySystemUtils;
 
 import java.util.ArrayList;
@@ -55,6 +57,11 @@ public class MyRecyclerViewActivity extends Activity implements MyCoolAdapter.My
         mRecyclerView.setAdapter(adapter);
         String language = MySystemUtils.getLanguage();
         Toast.makeText(this, language, Toast.LENGTH_SHORT).show();
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
+
     }
 
     private void setHeaderView(RecyclerView view) {

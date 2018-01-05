@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.example.cm.testrv.dragsettings.ItemTouchHelperAdapter;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by George on 2017/9/15.
  *
  */
 
-public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ItemTouchHelperAdapter{
     public static final int TYPE_HEADER = 0;  //说明是带有Header的
     public static final int TYPE_FOOTER = 1;  //说明是带有Footer的
     public static final int TYPE_NORMAL = 2;  //说明是不带有header和footer的
@@ -27,6 +29,20 @@ public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public MyCoolAdapter(ArrayList<String> list) {
         datalist = list;
+    }
+
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(datalist, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        datalist.remove(position);
+        notifyItemRemoved(position);
+
     }
 
     @Override
