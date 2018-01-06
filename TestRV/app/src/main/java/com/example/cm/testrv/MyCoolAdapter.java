@@ -155,5 +155,9 @@ public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         void onItemClickListener(View view, int position);
     }
 
+    @Override
+    public boolean canDropOver(int fromPosition, int toPosition) {
+        return true;
+    }
 }
 
