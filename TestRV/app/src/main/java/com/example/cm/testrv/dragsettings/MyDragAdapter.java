@@ -29,6 +29,7 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
 
     public MyDragAdapter(@NonNull List<ItemBean> datalist, OnStartDragListener mDragStartListener) {
         this.mDataList = datalist;
+        Collections.sort(mDataList);
         this.mDragStartListener = mDragStartListener;
     }
 
@@ -56,8 +57,6 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
         });
 
 
-
-
 //        ((MyDragViewHolder) holder).handleView.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
 //            public boolean onTouch(View v, MotionEvent event) {
@@ -77,6 +76,10 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
     }
 
 
+    @Override
+    public int getItemViewType(int position) {
+        return mDataList.get(position).viewType;
+    }
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
@@ -111,6 +114,8 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
     public void setOnItemClickListener(MyOnItemClickListener listener) {
         itemClickListener = listener;
     }
+
+
     /**
      * RecyclerView item点击接口
      */

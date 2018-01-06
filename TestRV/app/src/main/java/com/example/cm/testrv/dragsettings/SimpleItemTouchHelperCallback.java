@@ -52,6 +52,11 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         return false;
     }
 
+    @Override
+    public boolean isItemViewSwipeEnabled() {
+        return false;
+    }
+
     /**
      * ItemTouchHelper allows you to easily determine the direction of an event.
      * You must override getMovementFlags() to specify which directions of drags and swipes are supported.

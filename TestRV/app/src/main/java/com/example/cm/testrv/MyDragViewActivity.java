@@ -51,6 +51,7 @@ public class MyDragViewActivity extends AppCompatActivity implements
         adapter = new MyDragAdapter(mDataList, this);
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setHasFixedSize(true);
         String language = MySystemUtils.getLanguage();
         Toast.makeText(this, language, Toast.LENGTH_SHORT).show();
 
