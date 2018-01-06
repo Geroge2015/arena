@@ -104,7 +104,7 @@ public class BaseDataParseHelper {
         Log.d("George999", "path   " + path);
 
         FileOutputStream fos = null;
-//        BufferedOutputStream buffer = null;
+        BufferedOutputStream buffer = null;
         ObjectOutputStream oos = null;
         Log.d("George999", "config list:  " + configList);
 
@@ -112,9 +112,9 @@ public class BaseDataParseHelper {
             //序列化文件輸出流
             fos = new FileOutputStream(path);
             //构建缓冲流
-//            buffer = new BufferedOutputStream(fos);
+            buffer = new BufferedOutputStream(fos);
             //构建字符输出的对象流
-            oos = new ObjectOutputStream(fos);
+            oos = new ObjectOutputStream(buffer);
             oos.writeObject(configList);
             Log.d("George999", "writeConfigDataToFile  succeed :) ");
         } catch (IOException e) {

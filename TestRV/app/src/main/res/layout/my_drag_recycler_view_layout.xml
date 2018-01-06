@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_view_holder"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+    android:layout_height="40dp">
+    <TextView
+        android:id="@+id/my_drag_holder_textview"
+        android:layout_width="0dp"
+        android:layout_weight="9"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"/>
+
+    <ImageView
+        android:id="@+id/my_handle_icon"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_gravity="end"
+        android:background="@drawable/ic_my_handle_icon"
+        android:scaleType="centerInside"
+        />
+</LinearLayout>

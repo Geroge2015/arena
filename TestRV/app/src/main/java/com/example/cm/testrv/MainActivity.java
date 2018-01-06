@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
         RECYCLERVIEW_DEMO, VIEW_PAGER_DEMO, DEMO_FRAGMENT, START_SERVICE, STOP_SERVICE,
         BIND_SERVICE, UNBIND_SERVICE, CUSTOM_VIEW, DEMO_MY_SETTINGS, DEMO_REQUEST_INTERNET,
         DEMO_READ_CONTACTS_DATA,DEMO_TEST_FILES_DATA,GO_TO_INTERNET,SEND_NOTIFICATION, CAMERA_PHOTO,
-        VIDEO_MUSIC_PLAY, DOWNLOAD_IMAGE_RESIZE, REQUEST_START_UP_PAGE
+        VIDEO_MUSIC_PLAY, DOWNLOAD_IMAGE_RESIZE, REQUEST_START_UP_PAGE, MY_DRAG_RECYCLER_VIEW
     }
 
     private void addRecyclerView() {
@@ -170,10 +170,18 @@ public class MainActivity extends AppCompatActivity implements MyCoolAdapter.MyO
             case 17:
                 requestStartPage();
                 break;
+            case 18:
+                startDragViewActivity();
+                break;
+
             default:
                 break;
 
         }
+    }
+
+    private void startDragViewActivity() {
+        MyDragViewActivity.startMyDragActivity(this);
     }
 
     private void requestStartPage() {

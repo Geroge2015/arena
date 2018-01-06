@@ -15,6 +15,10 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         this.mAdapter = adapter;
     }
 
+    @Override
+    public boolean isLongPressDragEnabled() {
+        return false;
+    }
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {

@@ -21,7 +21,7 @@ public class BaseConfigBean implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseConfigBean : id = " + id + " classId = " + classId + " subClassId = " + subClassId
+         return "BaseConfigBean : id = " + id + " classId = " + classId + " subClassId = " + subClassId
                 + " startTime = " + startTime + " endTime = " + endTime + "beginDate = " + beginDate
                 + " expireDate = " + expireDate;
     }
