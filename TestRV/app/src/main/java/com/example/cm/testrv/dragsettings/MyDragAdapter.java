@@ -239,6 +239,7 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
                 this.optBtn.setImageResource(R.drawable.ic_remove_circle_black_24dp);
             }
             printMyLog(mDataList);
+            notifyDataSetChanged();
         }
         private void printMyLog(List<ItemBean> items) {
             Log.d("George2018go", "-------begin to resetOrder---------");

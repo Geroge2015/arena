@@ -3,8 +3,7 @@ package com.example.cm.testrv.dragsettings;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-
-import java.util.List;
+import android.util.Log;
 
 /**
  * Created by cm on 2018/1/5.
@@ -14,6 +13,7 @@ import java.util.List;
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private final ItemTouchHelperAdapter mItemTouchHelperAdapter;
+    private static final String TAG = "HelperCallback";
 
     public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
         this.mItemTouchHelperAdapter = adapter;
@@ -40,7 +40,9 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
             // Tell the view holder it's time to restore the idle state
             ItemTouchHelperViewHolder itemViewHolder =
                     ((ItemTouchHelperViewHolder) viewHolder);
+            Log.d(TAG, " itemView Holder.onItemClear");
             itemViewHolder.onItemClear();
+
         }
     }
 
@@ -81,13 +83,22 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
      */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        Log.d(TAG, "  onMove ...");
+
         mItemTouchHelperAdapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;
     }
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        Log.d(TAG, "  onChild Draw ...  viewHolder pos : " + viewHolder.getAdapterPosition());
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+    }
+
+    @Override
+    public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        Log.d(TAG, "  onChildDrawOver ...");
+        super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override
