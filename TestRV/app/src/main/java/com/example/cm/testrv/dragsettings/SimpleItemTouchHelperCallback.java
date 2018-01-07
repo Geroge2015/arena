@@ -1,10 +1,14 @@
 package com.example.cm.testrv.dragsettings;
 
+import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import java.util.List;
+
 /**
  * Created by cm on 2018/1/5.
+ *
  */
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
@@ -77,8 +81,13 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
      */
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-        mItemTouchHelperAdapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+        mItemTouchHelperAdapter.onItemMove(viewHolder, target);
         return true;
+    }
+
+    @Override
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override

@@ -39,6 +39,11 @@ public class MyCoolAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
+    public void onItemMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+
+    }
+
+    @Override
     public void onItemDismiss(int position) {
         datalist.remove(position);
         notifyItemRemoved(position);

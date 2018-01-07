@@ -28,7 +28,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/iv_opt"
             android:gravity="center_vertical"
-            android:text="Recent chats"
+            android:text=" Try drag and wipe me :) "
             android:textSize="15sp" />
 
         <android.support.v7.widget.AppCompatImageView

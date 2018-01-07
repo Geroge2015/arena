@@ -39,7 +39,7 @@ public class BastDataRequestHelper {
             "\"updatetime\":\"1511883214\",\"next_url\":\"http://cml.ksmobile.com/point-config/getlist\"}";
 
 
-    public static void requestConfigData(Context context) {
+    public static void requestConfigData(final Context context) {
         BaseDataRequest request = new BaseDataRequest(getDataRequestUrl(context), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -81,7 +81,7 @@ public class BastDataRequestHelper {
         return url;
     }
 
-    public static void requestBaseData(Context context, DataRequestListener listener) {
+    public static void requestBaseData(Context context, final DataRequestListener listener) {
         BaseDataRequest request = new BaseDataRequest(getUrl(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
