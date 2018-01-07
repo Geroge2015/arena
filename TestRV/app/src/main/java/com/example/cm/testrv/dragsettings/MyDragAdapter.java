@@ -132,15 +132,7 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-//        Collections.swap(mDataList, fromPosition, toPosition);
-        ItemBean bean = mDataList.remove(fromPosition);
-        mDataList.add(toPosition, bean);
-        int deviderPos = findHeaderPositon();
-        if (fromPosition < deviderPos && toPosition > deviderPos) {
-            bean.viewType = ItemBean.TYPE_REMOVED;
-        } else if (fromPosition > deviderPos && toPosition < deviderPos) {
-            bean.viewType = ItemBean.TYPE_ADDED;
-        }
+        Collections.swap(mDataList, fromPosition, toPosition);
         resetOrder(mDataList);
 ///*        *It’s very important to call notifyItemRemoved() and notifyItemMoved()
 //         * so the Adapter is aware of the changes. It’s also important to note that
@@ -150,30 +142,30 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
         notifyItemChanged(fromPosition, toPosition);
     }
 
-    @Override
-    public void onItemMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-        int fromPostion = viewHolder.getAdapterPosition();
-        int toPosition = target.getAdapterPosition();
-
-        ItemBean bean = mDataList.remove(fromPostion);
-        mDataList.add(toPosition, bean);
-        int dividerPos = findHeaderPositon();
-        Log.d(TAG, "onItemMove ...   fromPosition :" + fromPostion + "toPosition : " + toPosition + " divider line pos: " + dividerPos);
-//        if (toPosition > dividerPos) {
-//            bean.viewType = ItemBean.TYPE_REMOVED;
-////            ((MyDragViewHolder) target).optBtn.setImageResource(R.drawable.ic_add_circle_black_24dp);
-//        } else {
-//            bean.viewType = ItemBean.TYPE_ADDED;
-////            ((MyDragViewHolder) target).optBtn.setImageResource(R.drawable.ic_remove_circle_black_24dp);
-//        }
-        resetOrder(mDataList);
-///*        *It’s very important to call notifyItemRemoved() and notifyItemMoved()
-//         * so the Adapter is aware of the changes. It’s also important to note that
-//         * we’re changing the position of the item every time the view is shifted
-//         * to a new index, and not at the end of a “drop” event.*/
-        notifyItemMoved(fromPostion, toPosition);
-        notifyItemChanged(fromPostion, toPosition);
-    }
+//    @Override
+//    public void onItemMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//        int fromPostion = viewHolder.getAdapterPosition();
+//        int toPosition = target.getAdapterPosition();
+//
+//        ItemBean bean = mDataList.remove(fromPostion);
+//        mDataList.add(toPosition, bean);
+//        int dividerPos = findHeaderPositon();
+//        Log.d(TAG, "onItemMove ...   fromPosition :" + fromPostion + "toPosition : " + toPosition + " divider line pos: " + dividerPos);
+////        if (toPosition > dividerPos) {
+////            bean.viewType = ItemBean.TYPE_REMOVED;
+//////            ((MyDragViewHolder) target).optBtn.setImageResource(R.drawable.ic_add_circle_black_24dp);
+////        } else {
+////            bean.viewType = ItemBean.TYPE_ADDED;
+//////            ((MyDragViewHolder) target).optBtn.setImageResource(R.drawable.ic_remove_circle_black_24dp);
+////        }
+//        resetOrder(mDataList);
+/////*        *It’s very important to call notifyItemRemoved() and notifyItemMoved()
+////         * so the Adapter is aware of the changes. It’s also important to note that
+////         * we’re changing the position of the item every time the view is shifted
+////         * to a new index, and not at the end of a “drop” event.*/
+//        notifyItemMoved(fromPostion, toPosition);
+//        notifyItemChanged(fromPostion, toPosition);
+//    }
 
     @Override
     public boolean canDropOver(int fromPosition, int toPosition) {
@@ -234,6 +226,9 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
             Log.d(TAG, "onItemClear...");
             // itemView.setBackgroundColor(0);
             int position = this.getAdapterPosition();
+            if (position < 0 || position > mDataList.size() - 1) {
+                return;
+            }
             ItemBean bean = mDataList.get(position);
             int dividerPos = findHeaderPositon();
             if (position > dividerPos) {
@@ -243,7 +238,15 @@ public class MyDragAdapter extends RecyclerView.Adapter<MyDragAdapter.MyDragView
                 bean.viewType = ItemBean.TYPE_ADDED;
                 this.optBtn.setImageResource(R.drawable.ic_remove_circle_black_24dp);
             }
-
+            printMyLog(mDataList);
+        }
+        private void printMyLog(List<ItemBean> items) {
+            Log.d("George2018go", "-------begin to resetOrder---------");
+            for (int i = 0; i < items.size(); i++) {
+                final ItemBean item = items.get(i);
+                item.order = i;
+                Log.d("George2018go", "i = " + i + ", item : desc = " + item.desc + ", order = " + item.order + " , type : " + item.viewType);
+            }
         }
     }
 

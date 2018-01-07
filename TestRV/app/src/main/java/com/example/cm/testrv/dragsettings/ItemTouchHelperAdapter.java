@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 public interface ItemTouchHelperAdapter {
     void onItemMove(int fromPosition, int toPosition);
 
-    void onItemMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target);
-
     boolean canDropOver(int fromPosition, int toPosition);
 
     void onItemDismiss(int position);
